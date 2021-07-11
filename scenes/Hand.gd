@@ -20,4 +20,5 @@ func add_card(card):
 	var slot = self.first_empty_slot()
 	if slot:
 		card.draggable = true
-		slot.drop_in(card)
+		var duration = slot.drop_in(card)
+		card.reveal(duration)

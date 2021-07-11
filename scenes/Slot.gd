@@ -28,6 +28,7 @@ func drop_in(new_card):
 		var duration = min((target_position - starting_position).length() / speed, 0.3)
 		tween.interpolate_property(card, "global_position", starting_position, target_position, duration)
 		tween.start()
+		return duration
 
 func unset_card():
 	var old_card = card
