@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "DragStore",
 "language": "GDScript",
-"path": "res://DragStore.gd"
+"path": "res://stores/DragStore.gd"
 }, {
 "base": "",
 "class": "GitAPI",
@@ -27,8 +27,8 @@ _global_script_class_icons={
 [application]
 
 config/name="conviction-android"
-run/main_scene="res://Main.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/Main.tscn"
+config/icon="res://assets/icon.png"
 
 [display]
 
@@ -46,7 +46,7 @@ singletons=[ "res://git_api.gdnlib" ]
 
 [gui]
 
-theme/custom_font="res://DefaultFont.tres"
+theme/custom_font="res://assets/DefaultFont.tres"
 
 [input]
 

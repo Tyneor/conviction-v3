@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Slot.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 100, 150 )
+
+[node name="Slot" type="Panel"]
+anchor_right = 0.185
+anchor_bottom = 0.156
+margin_right = 0.199997
+margin_bottom = 0.47998
+rect_min_size = Vector2( 200, 300 )
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+position = Vector2( 100, 150 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Deck.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Hand.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Main.gd" type="Script" id=3]
+
+[node name="Main" type="Node"]
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.298039, 0.168627, 0.317647, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="debug" type="RichTextLabel" parent="."]
+margin_right = 1081.0
+margin_bottom = 388.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Deck" parent="." instance=ExtResource( 1 )]
+position = Vector2( 33.9027, 1601.9 )
+
+[node name="Hand" parent="." instance=ExtResource( 2 )]
+position = Vector2( 272.785, 1573.84 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 338.797
+margin_top = 644.602
+margin_right = 789.797
+margin_bottom = 774.602
+text = "Draw card"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
