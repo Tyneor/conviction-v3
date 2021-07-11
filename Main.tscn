@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Hand.tscn" type="PackedScene" id=1]
+
+[node name="Main" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.298039, 0.168627, 0.317647, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="debug" type="RichTextLabel" parent="."]
+margin_right = 1081.0
+margin_bottom = 388.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hand" parent="." instance=ExtResource( 1 )]
+position = Vector2( 132.936, 1408.56 )
+
+[node name="Hand2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 120.223, 463.519 )
