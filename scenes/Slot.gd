@@ -2,7 +2,6 @@ extends Panel
 
 const DragStore = preload("res://stores/DragStore.tres")
 
-signal card_removed
 onready var tween = $Tween
 var card = null setget set_card
 var droppable = false
@@ -32,10 +31,10 @@ func drop_in(new_card):
 
 func unset_card():
 	var old_card = card
-	var previous_global_position = card.global_position
-	self.remove_child(card)
-	get_tree().current_scene.add_child(card)
-	card.global_position = previous_global_position
-	card = null
-	emit_signal("card_removed")
+	if card:
+		var previous_global_position = card.global_position
+		self.remove_child(card)
+		get_tree().current_scene.add_child(card)
+		card.global_position = previous_global_position
+		card = null
 	return old_card

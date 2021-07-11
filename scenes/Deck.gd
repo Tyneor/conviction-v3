@@ -2,15 +2,17 @@ extends Node2D
 
 const Card = preload("res://scenes/Card.tscn")
 
-onready var Slot = $Slot
+onready var slot = $Slot
 var cards : Array = []
 
 func add_card(card):
-	if Slot.card == null:
-		Slot.card = card
+	if slot.card == null:
+		slot.card = card
 	else:
 		self.cards.append(card)
 
-func _on_Slot_card_removed():
+func draw_card():
+	var old_card = slot.unset_card()
 	if self.cards.size() > 0:
-		Slot.card = cards.pop_front()
+		slot.card = cards.pop_front()	
+	return old_card
