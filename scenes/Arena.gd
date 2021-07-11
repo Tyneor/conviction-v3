@@ -2,5 +2,8 @@ extends Node2D
 
 onready var slot = $Slot
 
+export var is_for_player = false
+
 func _ready():
-	slot.droppable = true
+	if is_for_player:
+		slot.droppable = true

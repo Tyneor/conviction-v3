@@ -18,17 +18,16 @@ func set_card(new_card):
 	card.position = self.rect_size / 2
 
 func drop_in(new_card):
-	if self.droppable:
-		card = new_card
-		var starting_position = new_card.global_position
-		get_tree().current_scene.remove_child(new_card)
-		self.add_child(card)
-		var speed = 1000
-		var target_position = rect_global_position + self.rect_size / 2
-		var duration = min((target_position - starting_position).length() / speed, 0.3)
-		tween.interpolate_property(card, "global_position", starting_position, target_position, duration)
-		tween.start()
-		return duration
+	card = new_card
+	var starting_position = new_card.global_position
+	get_tree().current_scene.remove_child(new_card)
+	self.add_child(card)
+	var speed = 1000
+	var target_position = rect_global_position + self.rect_size / 2
+	var duration = min((target_position - starting_position).length() / speed, 0.3)
+	tween.interpolate_property(card, "global_position", starting_position, target_position, duration)
+	tween.start()
+	return duration
 
 func unset_card():
 	var old_card = card
