@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Player.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Deck.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Hand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Arena.tscn" type="PackedScene" id=4]
+
+[node name="Player" type="Node"]
+script = ExtResource( 1 )
+
+[node name="PlayerDeck" parent="." instance=ExtResource( 2 )]
+position = Vector2( 29.6648, 1568 )
+
+[node name="PlayerHand" parent="." instance=ExtResource( 3 )]
+position = Vector2( 260.071, 1463.66 )
+is_for_player = true
+
+[node name="PlayerArena" parent="." instance=ExtResource( 4 )]
+position = Vector2( 678.055, 889.948 )
+is_for_player = true
+
+[node name="DrawButton" type="Button" parent="."]
+margin_left = 69.5171
+margin_top = 1289.82
+margin_right = 520.517
+margin_bottom = 1419.82
+text = "Draw card"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FightButton" type="Button" parent="."]
+margin_left = 567.865
+margin_top = 1285.32
+margin_right = 1018.86
+margin_bottom = 1415.32
+text = "Fight !"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="DrawButton" to="." method="_on_DrawButton_pressed"]
+[connection signal="pressed" from="FightButton" to="." method="_on_FightButton_pressed"]

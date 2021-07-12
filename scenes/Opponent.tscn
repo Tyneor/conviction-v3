@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Opponent.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Deck.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Hand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Arena.tscn" type="PackedScene" id=4]
+
+[node name="Opponent" type="Node"]
+script = ExtResource( 1 )
+
+[node name="OpponentDeck" parent="." instance=ExtResource( 2 )]
+position = Vector2( 843.333, 46.6083 )
+
+[node name="OpponentHand" parent="." instance=ExtResource( 3 )]
+position = Vector2( 31.2274, 94.8297 )
+
+[node name="OpponentArena" parent="." instance=ExtResource( 4 )]
+position = Vector2( 130.569, 864.13 )
+
+[node name="DrawButton" type="Button" parent="."]
+margin_left = 150.33
+margin_top = 506.238
+margin_right = 982.33
+margin_bottom = 636.238
+text = "Draw card for opponent"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="."]
+margin_left = 142.321
+margin_top = 674.428
+margin_right = 974.321
+margin_bottom = 804.428
+text = "Play card for opponent"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="DrawButton" to="." method="_on_DrawButton_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
