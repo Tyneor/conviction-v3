@@ -6,17 +6,20 @@ signal end_turn
 onready var opponent_deck = $OpponentDeck
 onready var opponent_hand = $OpponentHand
 onready var opponent_arena = $OpponentArena
-var cards = []
+var card_set = []
 
 func _ready():
 	for i in range(10):
 		var card = Card.instance()
 		card.number = i
-		cards.append(card)
+		card_set.append(card)
 
 func init_deck():
-	for card in cards:
-		opponent_deck.add_card(card.duplicate())
+	card_set.shuffle()
+	for card in card_set:
+		var new_card = card.duplicate()
+		new_card.number = card.number
+		opponent_deck.add_card(new_card)
 
 func _on_DrawButton_pressed():
 	var slot = opponent_hand.first_empty_slot()
@@ -26,6 +29,7 @@ func _on_DrawButton_pressed():
 			opponent_hand.add_card(card)
 
 func _on_PlayButton_pressed():
-	var card = opponent_hand.get_random_card()
-	if card:
-		opponent_arena.add_card(card)
+	if opponent_arena.slot.card == null:
+		var card = opponent_hand.get_random_card()
+		if card:
+			opponent_arena.add_card(card)

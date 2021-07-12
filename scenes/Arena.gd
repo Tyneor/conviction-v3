@@ -8,7 +8,9 @@ func _ready():
 	slot.droppable = is_for_player
 
 func add_card(card):
-	slot.drop_in(card)
+	var duration = slot.drop_in(card)
+	if not is_for_player:
+		card.play_reveal_animation(duration)
 
 func play_card():
 	var card = self.slot.unset_card()
