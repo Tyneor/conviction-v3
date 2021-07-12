@@ -7,6 +7,7 @@ onready var player_hand = $PlayerHand
 onready var player_arena = $PlayerArena
 onready var opponent_deck = $OpponentDeck
 onready var opponent_hand = $OpponentHand
+onready var opponent_arena = $OpponentArena
 
 func _ready():
 	randomize()
@@ -31,6 +32,9 @@ func _on_DrawButton_pressed():
 		var card = player_deck.draw_card()
 		if card:
 			player_hand.add_card(card)
+			
+func _on_FightButton_pressed():
+	player_arena.play_card()
 
 func _on_OpponentDrawButton_pressed():
 	var slot = opponent_hand.first_empty_slot()
@@ -39,7 +43,7 @@ func _on_OpponentDrawButton_pressed():
 		if card:
 			opponent_hand.add_card(card)
 
-func _on_FightButton_pressed():
-	var card = player_arena.slot.unset_card()
+func _on_OpponentPlayButton_pressed():
+	var card = opponent_hand.get_random_card()
 	if card:
-		card.queue_free()
+		opponent_arena.add_card(card)

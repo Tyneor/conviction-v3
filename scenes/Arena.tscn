@@ -7,3 +7,5 @@
 script = ExtResource( 2 )
 
 [node name="Slot" parent="." instance=ExtResource( 1 )]
+
+[connection signal="card_dropped" from="Slot" to="." method="_on_Slot_card_dropped"]

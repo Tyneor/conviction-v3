@@ -57,6 +57,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="OpponentPlayButton" type="Button" parent="."]
+margin_left = 142.321
+margin_top = 674.428
+margin_right = 974.321
+margin_bottom = 804.428
+text = "Play card for opponent"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="FightButton" type="Button" parent="."]
 margin_left = 567.865
 margin_top = 1285.32
@@ -72,8 +82,9 @@ position = Vector2( 678.055, 889.948 )
 is_for_player = true
 
 [node name="OpponentArena" parent="." instance=ExtResource( 4 )]
-position = Vector2( 165.275, 711.958 )
+position = Vector2( 130.569, 864.13 )
 
 [connection signal="pressed" from="DrawButton" to="." method="_on_DrawButton_pressed"]
 [connection signal="pressed" from="OpponentDrawButton" to="." method="_on_OpponentDrawButton_pressed"]
+[connection signal="pressed" from="OpponentPlayButton" to="." method="_on_OpponentPlayButton_pressed"]
 [connection signal="pressed" from="FightButton" to="." method="_on_FightButton_pressed"]

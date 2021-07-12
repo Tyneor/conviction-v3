@@ -24,3 +24,13 @@ func add_card(card):
 		if is_for_player:
 			card.draggable = true
 		card.play_draw_animation(duration, is_for_player)
+
+func get_random_card():
+	var filled_slots = []
+	for slot in self.slots:
+		if slot.card:
+			filled_slots.append(slot)
+	if filled_slots.size() > 0:
+		var slot = filled_slots[randi() % filled_slots.size()]
+		return slot.unset_card()
+	
