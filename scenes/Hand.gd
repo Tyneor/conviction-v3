@@ -19,11 +19,11 @@ func first_empty_slot():
 
 func add_card(card):
 	var slot = self.first_empty_slot()
-	if slot:
-		var duration = slot.drop_in(card)
-		if is_for_player:
-			card.draggable = true
-		card.play_draw_animation(duration, is_for_player)
+	assert(slot != null)
+	var duration = slot.drop_in(card)
+	if is_for_player:
+		card.draggable = true
+	yield(card.play_draw_animation(duration, is_for_player), "completed")
 
 func get_random_card():
 	var filled_slots = []
@@ -32,5 +32,5 @@ func get_random_card():
 			filled_slots.append(slot)
 	if filled_slots.size() > 0:
 		var slot = filled_slots[randi() % filled_slots.size()]
-		return slot.unset_card()
+		return slot.drag_off()
 	

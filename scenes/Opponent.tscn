@@ -17,25 +17,4 @@ position = Vector2( 31.2274, 94.8297 )
 [node name="OpponentArena" parent="." instance=ExtResource( 4 )]
 position = Vector2( 130.569, 864.13 )
 
-[node name="DrawButton" type="Button" parent="."]
-margin_left = 150.33
-margin_top = 506.238
-margin_right = 982.33
-margin_bottom = 636.238
-text = "Draw card for opponent"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PlayButton" type="Button" parent="."]
-margin_left = 142.321
-margin_top = 674.428
-margin_right = 974.321
-margin_bottom = 804.428
-text = "Play card for opponent"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="pressed" from="DrawButton" to="." method="_on_DrawButton_pressed"]
-[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="card_played" from="OpponentArena" to="." method="_on_OpponentArena_card_played"]

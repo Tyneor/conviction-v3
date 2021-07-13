@@ -18,11 +18,11 @@ func drop():
 			break
 
 	var old_slot = dragged_card.get_parent()
-	old_slot.unset_card()
+	old_slot.drag_off()
 	
 	if new_slot and new_slot != old_slot:
 		if new_slot.card:
-			old_slot.drop_in(new_slot.unset_card())
+			old_slot.drop_in(new_slot.drag_off())
 		new_slot.drop_in(dragged_card)
 	else:
 		old_slot.drop_in(dragged_card)

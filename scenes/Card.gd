@@ -19,10 +19,12 @@ func play_draw_animation(duration=1, flip_card=true):
 		$AnimationPlayer.play("Draw")
 	else:
 		$AnimationPlayer.play("DrawWithoutFlip")
+	yield($AnimationPlayer, "animation_finished")
 
 func play_reveal_animation(duration=1):
 	$AnimationPlayer.playback_speed = 1 / duration
-	$AnimationPlayer.play("Draw")
+	$AnimationPlayer.play("Reveal")
+	yield($AnimationPlayer, "animation_finished")
 		
 func _on_Card_input_event(_viewport, event, _shape_idx):
 	if draggable && event.is_action_pressed("ui_touch") and DragStore.dragged_card == null:

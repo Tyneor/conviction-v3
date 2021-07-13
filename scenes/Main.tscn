@@ -10,19 +10,26 @@ script = ExtResource( 3 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 3.56763
+margin_right = 3.56763
 mouse_filter = 2
 color = Color( 0.298039, 0.168627, 0.317647, 1 )
 __meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="debug" type="RichTextLabel" parent="."]
-margin_right = 1081.0
-margin_bottom = 388.0
-__meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 
 [node name="Opponent" parent="." instance=ExtResource( 6 )]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 198.691
+margin_top = 695.373
+margin_right = 418.691
+margin_bottom = 929.373
+text = "PO: 0
+Last change: +0"
+__meta__ = {
+"_edit_use_anchors_": false
+}

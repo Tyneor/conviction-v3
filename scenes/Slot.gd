@@ -18,6 +18,11 @@ func set_card(new_card):
 	self.add_child(card)
 	card.position = self.rect_size / 2
 
+func delete_card():
+	card.queue_free()
+	# self.remove_child(card)
+	card = null
+
 func drop_in(new_card):
 	assert(card == null, "dropped a card on a non-empty slot")
 	card = new_card
@@ -32,7 +37,7 @@ func drop_in(new_card):
 	tween.start()
 	return duration
 
-func unset_card():
+func drag_off():
 	var old_card = card
 	if card:
 		var previous_global_position = card.global_position
