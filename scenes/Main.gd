@@ -31,11 +31,11 @@ func _ready():
 				yield(showdown_opponent, "completed")
 	
 	if player.followers_first_empty_slot() == null:
-		$Label.text = "Congratulations, you won !"
+		$Label.text = "Congratulations,\n you won !"
 	elif opponent.followers_first_empty_slot() == null:
-		$Label.text = "Oh no..., you lost"
+		$Label.text = "Oh no...,\n you lost"
 	else:
-		$Label.text = "Nobody won, something wrong happened ;/"
+		$Label.text = "Nobody won,\n something wrong happened ;/"
 
 func showdown(is_last_orator_player):
 	var player_card = player.arena.slot.card

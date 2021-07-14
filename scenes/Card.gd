@@ -34,11 +34,11 @@ func play_reveal_animation(duration=1):
 func _on_Card_input_event(_viewport, event, _shape_idx):
 	if draggable && event.is_action_pressed("ui_touch") and DragStore.dragged_card == null:
 		DragStore.drag(self)
-		self.z_index = 2
+		self.z_index = 1
 		self.grabbed_offset = self.global_position - get_global_mouse_position()
 #		get_tree().set_input_as_handled()
 		
 	if event.is_action_released("ui_touch") and DragStore.dragged_card == self:
 		var duration = DragStore.drop()
 		yield(get_tree().create_timer(duration), "timeout")
-		self.z_index = 1
+		self.z_index = 0
