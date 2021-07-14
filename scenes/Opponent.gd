@@ -3,8 +3,8 @@ const Card = preload("res://scenes/Card.tscn")
 
 signal card_played
 
-onready var opponent_deck = $OpponentDeck
-onready var opponent_hand = $OpponentHand
+onready var opponent_deck = $Panel/HBoxContainer/VBoxContainer/OpponentDeck
+onready var opponent_hand = $Panel/HBoxContainer/OpponentHand
 onready var opponent_arena = $OpponentArena
 var card_set = []
 

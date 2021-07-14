@@ -14,15 +14,20 @@ func _input(_event):
 		self.global_position = get_global_mouse_position() + self.grabbed_offset
 		
 func play_draw_animation(duration=1, flip_card=true):
-	$AnimationPlayer.playback_speed = 1 / duration
 	if flip_card:
 		$AnimationPlayer.play("Draw")
 	else:
 		$AnimationPlayer.play("DrawWithoutFlip")
+	if duration > 0:
+		$AnimationPlayer.playback_speed = 1 / duration
+	else:
+		pass
+#		$AnimationPlayer.advance(1)
 	yield($AnimationPlayer, "animation_finished")
 
 func play_reveal_animation(duration=1):
-	$AnimationPlayer.playback_speed = 1 / duration
+	if duration > 0:
+		$AnimationPlayer.playback_speed = 1 / duration
 	$AnimationPlayer.play("Reveal")
 	yield($AnimationPlayer, "animation_finished")
 		
@@ -34,5 +39,6 @@ func _on_Card_input_event(_viewport, event, _shape_idx):
 #		get_tree().set_input_as_handled()
 		
 	if event.is_action_released("ui_touch") and DragStore.dragged_card == self:
-		DragStore.drop()
+		var duration = DragStore.drop()
+		yield(get_tree().create_timer(duration), "timeout")
 		self.z_index = 1

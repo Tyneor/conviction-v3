@@ -31,7 +31,6 @@ func showdown(is_last_gamer_player):
 			"personal_opinion": personal_opinion, 
 			"last_personal_opinion_change": last_personal_opinion_change
 		})
-		yield(get_tree().create_timer(1.0), "timeout")
 		if is_last_gamer_player:
 			opponent.opponent_arena.delete_card()
 		else:

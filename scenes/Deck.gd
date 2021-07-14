@@ -1,4 +1,4 @@
-extends Node2D
+extends CenterContainer
 
 const Card = preload("res://scenes/Card.tscn")
 

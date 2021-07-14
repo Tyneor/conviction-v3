@@ -1,10 +1,11 @@
 extends Node
+
 const Card = preload("res://scenes/Card.tscn")
 
 signal card_played
 
-onready var player_deck = $PlayerDeck
-onready var player_hand = $PlayerHand
+onready var player_deck = $Panel/HBoxContainer/VBoxContainer/PlayerDeck
+onready var player_hand = $Panel/HBoxContainer/PlayerHand
 onready var player_arena = $PlayerArena
 var card_set = []
 
