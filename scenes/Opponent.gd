@@ -57,13 +57,11 @@ func play_random_card():
 
 func add_follower():
 	var follower = Auditor.instance()
-	var panel = Panel.new()
-	var style = StyleBoxEmpty.new()
-	panel.set("custom_styles/panel", style)
-	panel.add_child(follower)
-	panel.rect_min_size = Vector2(60, 60)
-	followers.add_child(panel)
-	follower.position += panel.rect_size / 2
+	for panel in followers.get_children():
+		if panel.get_child_count() == 0:
+			panel.add_child(follower)
+			follower.position += panel.rect_size / 2
+			break;
 
 func _on_OpponentArena_card_played():
 	emit_signal("card_played")
