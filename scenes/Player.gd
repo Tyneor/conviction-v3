@@ -48,13 +48,12 @@ func draw_card():
 		if card:
 			yield(hand.add_card(card), "completed")
 
-func add_follower():
+func followers_first_empty_slot():
 	var follower = Auditor.instance()
 	for panel in followers.get_children():
 		if panel.get_child_count() == 0:
-			panel.add_child(follower)
-			follower.position += panel.rect_size / 2
-			break;
+			return panel
+	return null
 
 func _on_PlayerArena_card_played():
 	emit_signal("card_played")
