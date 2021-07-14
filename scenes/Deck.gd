@@ -12,6 +12,7 @@ func add_card(card):
 		self.cards.append(card)
 
 func draw_card():
+	assert(slot.card != null)
 	var old_card = slot.drag_off()
 	if self.cards.size() > 0:
 		slot.card = cards.pop_front()	

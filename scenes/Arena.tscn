@@ -23,6 +23,14 @@ __meta__ = {
 }
 
 [node name="Slot" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -150.0
+margin_right = 100.0
+margin_bottom = 150.0
 custom_styles/panel = SubResource( 1 )
 
 [connection signal="card_dropped" from="Slot" to="." method="_on_Slot_card_dropped"]

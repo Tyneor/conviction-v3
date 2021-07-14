@@ -4,14 +4,13 @@ const Card = preload("res://scenes/Card.tscn")
 
 onready var player = $Player
 onready var opponent = $Opponent
-onready var label = $Label
+onready var ladder = $Ladder
 var personal_opinion = 0
-var last_personal_opinion_change = 0
 
 func _ready():
 	randomize()
-	player.start_game()
-	opponent.start_game()
+	player.start_set()
+	opponent.start_set()
 
 	while true:
 		print("player turn")
@@ -22,16 +21,19 @@ func _ready():
 		showdown(false)
 
 func showdown(is_last_gamer_player):
-	var player_card = player.player_arena.slot.card
-	var opponent_card = opponent.opponent_arena.slot.card
+	var player_card = player.arena.slot.card
+	var opponent_card = opponent.arena.slot.card
 	if player_card and opponent_card:
-		last_personal_opinion_change = player_card.number - opponent_card.number
-		personal_opinion += last_personal_opinion_change
-		label.text = "PO: {personal_opinion}\nLast change: {last_personal_opinion_change}".format({
-			"personal_opinion": personal_opinion, 
-			"last_personal_opinion_change": last_personal_opinion_change
-		})
+		personal_opinion += player_card.number - opponent_card.number
+		var new_follower = ladder.set_score(personal_opinion)
+		if new_follower:
+			personal_opinion = 0
+			ladder.set_score(0)
+			if new_follower == "player":
+				player.add_follower()
+			if new_follower == "opponent":
+				opponent.add_follower()
 		if is_last_gamer_player:
-			opponent.opponent_arena.delete_card()
+			opponent.arena.delete_card()
 		else:
-			player.player_arena.delete_card()
+			player.arena.delete_card()

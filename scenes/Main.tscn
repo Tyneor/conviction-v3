@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://scenes/Ladder.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Main.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Opponent.tscn" type="PackedScene" id=6]
@@ -13,6 +14,7 @@ anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0.0392157, 0.184314, 0.137255, 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -20,13 +22,4 @@ __meta__ = {
 
 [node name="Opponent" parent="." instance=ExtResource( 6 )]
 
-[node name="Label" type="Label" parent="."]
-margin_left = 198.691
-margin_top = 695.373
-margin_right = 418.691
-margin_bottom = 929.373
-text = "PO: 0
-Last change: +0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Ladder" parent="." instance=ExtResource( 1 )]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Opponent.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Deck.tscn" type="PackedScene" id=2]
@@ -17,6 +17,8 @@ shader_param/size = Vector2( 945, 380 )
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 2048, 2048 )
 
+[sub_resource type="StyleBoxEmpty" id=3]
+
 [node name="Opponent" type="Node"]
 script = ExtResource( 1 )
 
@@ -25,10 +27,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -350.604
-margin_top = -188.787
-margin_right = -350.604
-margin_bottom = -188.787
+margin_left = -150.0
+margin_top = -100.0
+margin_right = -150.0
+margin_bottom = -100.0
 
 [node name="Panel" type="Panel" parent="."]
 material = SubResource( 1 )
@@ -44,12 +46,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+[node name="Table" type="HBoxContainer" parent="Panel"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -150.0
-margin_bottom = 150.0
+margin_top = -160.0
+margin_bottom = 160.0
 mouse_filter = 2
 custom_constants/separation = 30
 alignment = 1
@@ -57,16 +59,62 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_left = 47.0
-margin_right = 207.0
-margin_bottom = 300.0
+[node name="Left" type="VBoxContainer" parent="Panel/Table"]
+margin_left = 62.0
+margin_right = 192.0
+margin_bottom = 330.0
+custom_constants/separation = 20
 
-[node name="OpponentDeck" parent="Panel/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+[node name="OpponentDeck" parent="Panel/Table/Left" instance=ExtResource( 2 )]
+margin_right = 130.0
 
-[node name="OpponentHand" parent="Panel/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 237.0
-margin_right = 897.0
-margin_bottom = 300.0
+[node name="Followers" type="GridContainer" parent="Panel/Table/Left"]
+margin_top = 200.0
+margin_right = 130.0
+margin_bottom = 330.0
+rect_min_size = Vector2( 0, 60 )
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 2
+
+[node name="Panel" type="Panel" parent="Panel/Table/Left/Followers"]
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel2" type="Panel" parent="Panel/Table/Left/Followers"]
+margin_left = 70.0
+margin_right = 130.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel3" type="Panel" parent="Panel/Table/Left/Followers"]
+margin_top = 70.0
+margin_right = 60.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 60, 60 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel4" type="Panel" parent="Panel/Table/Left/Followers"]
+margin_left = 70.0
+margin_top = 70.0
+margin_right = 130.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 60, 60 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Right" type="VBoxContainer" parent="Panel/Table"]
+margin_left = 222.0
+margin_right = 882.0
+margin_bottom = 330.0
+mouse_filter = 2
+alignment = 1
+
+[node name="OpponentHand" parent="Panel/Table/Right" instance=ExtResource( 3 )]
+margin_top = 15.0
+margin_right = 660.0
+margin_bottom = 315.0
 
 [connection signal="card_played" from="OpponentArena" to="." method="_on_OpponentArena_card_played"]

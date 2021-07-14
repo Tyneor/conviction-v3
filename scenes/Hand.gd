@@ -33,4 +33,9 @@ func get_random_card():
 	if filled_slots.size() > 0:
 		var slot = filled_slots[randi() % filled_slots.size()]
 		return slot.drag_off()
-	
+
+func is_empty():
+	for slot in self.slots:
+		if slot.card != null:
+			return false
+	return true

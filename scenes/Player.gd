@@ -1,12 +1,13 @@
 extends Node
-
 const Card = preload("res://scenes/Card.tscn")
+const Auditor = preload("res://scenes/Auditor.tscn")
 
 signal card_played
 
-onready var player_deck = $Panel/HBoxContainer/VBoxContainer/PlayerDeck
-onready var player_hand = $Panel/HBoxContainer/PlayerHand
-onready var player_arena = $PlayerArena
+onready var deck = $Panel/Table/Left/PlayerDeck
+onready var followers = $Panel/Table/Left/Followers
+onready var hand = $Panel/Table/Right/PlayerHand
+onready var arena = $PlayerArena
 var card_set = []
 
 func _init():	
@@ -16,7 +17,7 @@ func _init():
 		card.number = i
 		card_set.append(card)
 
-func start_game():
+func start_set():
 	self.reset_deck()
 	for _i in range(3):
 		var res = self.draw_card()
@@ -24,25 +25,36 @@ func start_game():
 			yield(res, "completed")
 
 func start_turn():
-	player_arena.slot.droppable = true
+	arena.slot.droppable = true
 	yield(self, "card_played")
-	var res = self.draw_card()
-	if res is GDScriptFunctionState:
-		yield(res, "completed")
+	if deck.slot.card:
+		var res = self.draw_card()
+		if res is GDScriptFunctionState:
+			yield(res, "completed")
+	elif hand.is_empty():
+		self.start_set()
 
 func reset_deck():
 	card_set.shuffle()
 	for card in card_set:
 		var new_card = card.duplicate()
 		new_card.number = card.number
-		player_deck.add_card(new_card)
+		deck.add_card(new_card)
 
 func draw_card():
-	var slot = player_hand.first_empty_slot()
+	var slot = hand.first_empty_slot()
 	if slot:
-		var card = player_deck.draw_card()
+		var card = deck.draw_card()
 		if card:
-			yield(player_hand.add_card(card), "completed")
+			yield(hand.add_card(card), "completed")
+
+func add_follower():
+	var follower = Auditor.instance()
+	for panel in followers.get_children():
+		if panel.get_child_count() == 0:
+			panel.add_child(follower)
+			follower.position += panel.rect_size / 2
+			break;
 
 func _on_PlayerArena_card_played():
 	emit_signal("card_played")
