@@ -12,6 +12,9 @@ func _init():
 func _ready():
 	self.label = self.get_class()
 
+func get_description():
+	return "If the opponent card is between %d and %d the current auditor swaps side, otherwise, %s" % [self.min_value, self.max_value, self.otherwise.description]
+
 func compare_with(other_card):
 	.compare_with(other_card)
 	if other_card.get_class() == "Argument" and other_card.value >= self.min_value and other_card.value <= self.max_value:

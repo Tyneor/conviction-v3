@@ -7,11 +7,16 @@ func set_value(new_value):
 	value = new_value
 	self.label = str(self.value)
 
-func compare_with(other_card) -> int:
+func get_description():
+	return "+ %d personal opinion" % self.value
+
+func compare_with(other_card):
 	.compare_with(other_card)
-	if other_card.get_class() in ["Counter", "Eureka"]:
-		return - other_card.compare_with(self)
-	if other_card.get_class() == "Swap":
-		return other_card.compare_with(self)
+	if other_card.get_class() in ["Counter", "Eureka", "Swap"]:
+		match other_card.compare_with(self):
+			"swap":
+				return "swap"
+			var score_delta:
+				return - score_delta
 	return self.value - other_card.value
 	

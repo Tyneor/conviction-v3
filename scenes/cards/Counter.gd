@@ -11,6 +11,9 @@ func _init():
 
 func _ready():
 	self.label = self.get_class()
+	
+func get_description():
+	return "If the opponent card is between %d and %d you gain its value, otherwise, %s" % [self.min_value, self.max_value, self.otherwise.description]
 
 func compare_with(other_card) -> int:
 	.compare_with(other_card)
