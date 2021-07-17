@@ -7,7 +7,7 @@ const CardDetails = preload("res://scenes/cards/CardDetails.tscn")
 
 var draggable := false
 var grabbed_offset : Vector2
-var has_been_dragged := false
+var has_been_dragged := true
 var label := "Card" setget set_label
 var description : String setget ,get_description
 
