@@ -1,10 +1,13 @@
 extends CenterContainer
 
-const Card = preload("res://scenes/Card.tscn")
-
 onready var slot = $Slot
-var cards : Array = []
+var cards := [] setget set_cards
 
+func set_cards(new_cards : Array):
+	assert(self.cards.size() == 0)
+	for card in new_cards:
+		self.add_card(card)
+	
 func add_card(card):
 	if slot.card == null:
 		slot.card = card

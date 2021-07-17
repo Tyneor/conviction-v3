@@ -1,22 +1,17 @@
-extends Node
+class_name Orator extends Node
 
-const Card = preload("res://scenes/Card.tscn")
+const ArgumentScn = preload("res://scenes/cards/Argument.tscn")
+const CounterScn = preload("res://scenes/cards/Counter.tscn")
+const SwapScn = preload("res://scenes/cards/Swap.tscn")
+const EurekaScn = preload("res://scenes/cards/Eureka.tscn")
 const Auditor = preload("res://scenes/Auditor.tscn")
 
 signal card_played
 
-onready var deck = $Panel/Table/Left/PlayerDeck
+onready var deck = $Panel/Table/Left/Deck
 onready var followers = $Panel/Table/Left/Followers
-onready var hand = $Panel/Table/Right/PlayerHand
-onready var arena = $PlayerArena
-var card_data_set = []
-
-func _init():	
-	for i in range(7):
-		card_data_set.append(CardData.new(PersonalBonus.new(i)))
-	card_data_set.append(CardData.new(Swap.new()))
-	card_data_set.append(CardData.new(Counter.new()))
-	card_data_set.append(CardData.new(Eureka.new()))
+onready var hand = $Panel/Table/Right/Hand
+onready var arena = $Arena
 
 func start_set():
 	self.reset_deck()
@@ -25,8 +20,19 @@ func start_set():
 		if res is GDScriptFunctionState:
 			yield(res, "completed")
 
+func reset_deck():
+	var cards = []
+	for i in range(7):
+		var argument = ArgumentScn.instance()
+		argument.value = i
+		cards.append(argument)
+	cards.append(CounterScn.instance())
+	cards.append(SwapScn.instance())
+	cards.append(EurekaScn.instance())
+	cards.shuffle()
+	deck.cards = cards
+
 func start_turn():
-	arena.slot.droppable = true
 	yield(self, "card_played")
 	if deck.slot.card:
 		var res = self.draw_card()
@@ -34,14 +40,6 @@ func start_turn():
 			yield(res, "completed")
 	elif hand.is_empty():
 		self.start_set()
-
-func reset_deck():
-	card_data_set.shuffle()
-	for card_data in card_data_set:
-		var card = Card.instance()
-		card.data = card_data
-		deck.add_card(card)
-#		card.data = card_data
 
 func draw_card():
 	var slot = hand.first_empty_slot()
@@ -57,6 +55,6 @@ func followers_first_empty_slot():
 			return panel
 	return null
 
-func _on_PlayerArena_card_played():
+func _on_Arena_card_played():
 	emit_signal("card_played")
 

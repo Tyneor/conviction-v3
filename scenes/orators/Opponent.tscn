@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/Hand.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/orators/Opponent.gd" type="Script" id=2]
+[ext_resource path="res://assets/textures/wood-clean-seamless-handcrafted.jpg" type="Texture" id=3]
+[ext_resource path="res://shaders/BorderRadius.shader" type="Shader" id=4]
+[ext_resource path="res://scenes/Arena.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Deck.tscn" type="PackedScene" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 4 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/radius = 0.1
+shader_param/size = Vector2( 945, 380 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 2048, 2048 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[node name="Opponent" type="Node"]
+script = ExtResource( 2 )
+
+[node name="Arena" parent="." instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -100.0
+margin_right = -150.0
+margin_bottom = -100.0
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource( 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -472.5
+margin_top = 50.0
+margin_right = 472.5
+margin_bottom = 430.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Table" type="HBoxContainer" parent="Panel"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -165.0
+margin_bottom = 165.0
+mouse_filter = 2
+custom_constants/separation = 30
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="VBoxContainer" parent="Panel/Table"]
+margin_left = 62.0
+margin_right = 192.0
+margin_bottom = 330.0
+custom_constants/separation = 20
+
+[node name="Deck" parent="Panel/Table/Left" instance=ExtResource( 6 )]
+margin_right = 130.0
+
+[node name="Followers" type="GridContainer" parent="Panel/Table/Left"]
+margin_top = 200.0
+margin_right = 130.0
+margin_bottom = 330.0
+rect_min_size = Vector2( 0, 60 )
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 2
+
+[node name="Panel" type="Panel" parent="Panel/Table/Left/Followers"]
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel2" type="Panel" parent="Panel/Table/Left/Followers"]
+margin_left = 70.0
+margin_right = 130.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel3" type="Panel" parent="Panel/Table/Left/Followers"]
+margin_top = 70.0
+margin_right = 60.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 60, 60 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel4" type="Panel" parent="Panel/Table/Left/Followers"]
+margin_left = 70.0
+margin_top = 70.0
+margin_right = 130.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 60, 60 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Right" type="VBoxContainer" parent="Panel/Table"]
+margin_left = 222.0
+margin_right = 882.0
+margin_bottom = 330.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Hand" parent="Panel/Table/Right" instance=ExtResource( 1 )]
+margin_top = 15.0
+margin_right = 660.0
+margin_bottom = 315.0
+
+[connection signal="card_played" from="Arena" to="." method="_on_Arena_card_played"]

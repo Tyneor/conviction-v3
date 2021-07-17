@@ -1,18 +1,25 @@
-extends Area2D
+class_name Card extends Area2D
+func get_class(): return "Card"
 
 const DragStore = preload("res://stores/DragStore.tres")
 
-var data : CardData
 var grabbed_offset : Vector2
-var draggable = false
+var draggable := false
+var label := "Card" setget set_label
 
-func _ready():
-	$TextureRect/Label.text = self.data.name
+func set_label(new_label):
+	label = new_label
+	# TODO : set _on_enter_tree because not changed
+	if get_node_or_null("TextureRect/Label"):
+		$TextureRect/Label.text = self.label
 	
 func _input(_event):
 	if DragStore.dragged_card == self:
 		self.global_position = get_global_mouse_position() + self.grabbed_offset
-		
+
+func compare_with(other_card):
+	assert(self.get_class() != "Card" and other_card.get_class() != "Card", "Card is an abstract class that can't be compared")
+
 func play_draw_animation(duration=1, flip_card=true):
 	if flip_card:
 		$AnimationPlayer.play("Draw")

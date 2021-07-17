@@ -1,6 +1,5 @@
 extends CenterContainer
 
-const Card = preload("res://scenes/Card.tscn")
 const Slot = preload("res://scenes/Slot.gd")
 
 export var is_for_player = false

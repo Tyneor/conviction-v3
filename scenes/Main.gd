@@ -1,12 +1,13 @@
 extends Node
 
+const ScoreStore = preload("res://stores/ScoreStore.tres")
 const Auditor = preload("res://scenes/Auditor.tscn")
-const Card = preload("res://scenes/Card.tscn")
 
 onready var player = $Player
 onready var opponent = $Opponent
 onready var ladder = $Ladder
 var game_running = false
+var current_orator
 var auditors = []
 
 func _ready():
@@ -14,21 +15,24 @@ func _ready():
 	self.game_running = true
 	for _i in range(7):
 		self.auditors.append(Auditor.instance())
-	self.set_new_auditor()
+	self.start_new_round()
 	self.player.start_set()
 	self.opponent.start_set()
+	self.current_orator = player
 
 	while self.game_running:
-		yield(player.start_turn(), "completed")
-		var showdown_player = self.showdown(true)
-		if showdown_player is GDScriptFunctionState:
-			yield(showdown_player, "completed")
+		yield(current_orator.start_turn(), "completed")
+		var res = self.showdown()
+		if res is GDScriptFunctionState:
+			yield(res, "completed")
 		
 		if self.game_running:
-			yield(opponent.start_turn(), "completed")
-			var showdown_opponent = self.showdown(false)
-			if showdown_opponent is GDScriptFunctionState:
-				yield(showdown_opponent, "completed")
+			if current_orator == player:
+				current_orator = opponent
+			else:
+				current_orator = player
+			if current_orator.arena.slot.card:
+					current_orator.arena.delete_card()
 	
 	if player.followers_first_empty_slot() == null:
 		$Label.text = "Congratulations,\n you won !"
@@ -37,31 +41,31 @@ func _ready():
 	else:
 		$Label.text = "Nobody won,\n something wrong happened ;/"
 
-func showdown(is_last_orator_player):
+func showdown():
 	var player_card = player.arena.slot.card
 	var opponent_card = opponent.arena.slot.card
-	if player_card and opponent_card:
-		var player_won_round
-		var res = ladder.set_score(ladder.score + player_card.number - opponent_card.number)
+	if player_card and opponent_card: # aka not the first turn
+		ScoreStore.score += player_card.compare_with(opponent_card)
+		var res = ladder.move_auditor()
 		if res is GDScriptFunctionState:
-			player_won_round = yield(res, "completed")
-		if player_won_round != null:
-			var auditor = ladder.auditor
-			var winning_orator = player if player_won_round else opponent
-			auditor.move_to_parent(winning_orator.followers_first_empty_slot())
-			ladder.auditor = null
-			if winning_orator.followers_first_empty_slot() == null:
-				self.game_running = false
-				return
-			self.set_new_auditor()
-				
-		if is_last_orator_player:
-			opponent.arena.delete_card()
-		else:
-			player.arena.delete_card()
+			yield(res, "completed")
+		if ScoreStore.score == ScoreStore.min_score:
+			self.finish_current_round(opponent)
+			self.start_new_round()
+		if ScoreStore.score == ScoreStore.max_score:
+			self.finish_current_round(player)
+			self.start_new_round()
 
-func set_new_auditor():
+func finish_current_round(round_winner):
+	var auditor = ladder.auditor
+	auditor.move_to_parent(round_winner.followers_first_empty_slot())
+	ladder.auditor = null
+	if round_winner.followers_first_empty_slot() == null:
+		self.game_running = false
+
+func start_new_round():
 	var auditor = auditors.pop_back()
 	if auditor:
 		ladder.auditor = auditor
-		ladder.score = 0
+		ScoreStore.score = 0
+		ladder.move_auditor()
