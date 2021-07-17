@@ -7,17 +7,17 @@
 [ext_resource path="res://assets/textures/wood-clean-seamless-handcrafted.jpg" type="Texture" id=5]
 [ext_resource path="res://shaders/BorderRadius.shader" type="Shader" id=6]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
 shader_param/color = Color( 1, 1, 1, 1 )
 shader_param/radius = 0.1
 shader_param/size = Vector2( 945, 380 )
 
-[sub_resource type="StyleBoxTexture" id=1]
+[sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 2048, 2048 )
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="Player" type="Node"]
 script = ExtResource( 1 )
@@ -35,7 +35,7 @@ mouse_filter = 2
 is_for_player = true
 
 [node name="Panel" type="Panel" parent="."]
-material = SubResource( 3 )
+material = SubResource( 1 )
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -45,7 +45,7 @@ margin_top = -420.0
 margin_right = 472.5
 margin_bottom = -40.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -82,21 +82,21 @@ columns = 2
 margin_right = 60.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Panel2" type="Panel" parent="Panel/Table/Left/Followers"]
 margin_left = 70.0
 margin_right = 130.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Panel3" type="Panel" parent="Panel/Table/Left/Followers"]
 margin_top = 70.0
 margin_right = 60.0
 margin_bottom = 130.0
 rect_min_size = Vector2( 60, 60 )
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Panel4" type="Panel" parent="Panel/Table/Left/Followers"]
 margin_left = 70.0
@@ -104,7 +104,7 @@ margin_top = 70.0
 margin_right = 130.0
 margin_bottom = 130.0
 rect_min_size = Vector2( 60, 60 )
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="PlayerDeck" parent="Panel/Table/Left" instance=ExtResource( 2 )]
 margin_top = 150.0

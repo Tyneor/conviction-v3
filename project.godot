@@ -9,19 +9,67 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "CardData",
+"language": "GDScript",
+"path": "res://classes/card_data/CardData.gd"
+}, {
+"base": "Power",
+"class": "Counter",
+"language": "GDScript",
+"path": "res://classes/card_data/power/Counter.gd"
+}, {
 "base": "Resource",
 "class": "DragStore",
 "language": "GDScript",
 "path": "res://stores/DragStore.gd"
 }, {
+"base": "Power",
+"class": "Eureka",
+"language": "GDScript",
+"path": "res://classes/card_data/power/Eureka.gd"
+}, {
 "base": "",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://git_api.gdns"
+}, {
+"base": "Impact",
+"class": "GlobalBonus",
+"language": "GDScript",
+"path": "res://classes/card_data/impact/GlobalBonus.gd"
+}, {
+"base": "Reference",
+"class": "Impact",
+"language": "GDScript",
+"path": "res://classes/card_data/impact/Impact.gd"
+}, {
+"base": "Power",
+"class": "PersonalBonus",
+"language": "GDScript",
+"path": "res://classes/card_data/power/PersonalBonus.gd"
+}, {
+"base": "Reference",
+"class": "Power",
+"language": "GDScript",
+"path": "res://classes/card_data/power/Power.gd"
+}, {
+"base": "Power",
+"class": "Swap",
+"language": "GDScript",
+"path": "res://classes/card_data/power/Swap.gd"
 } ]
 _global_script_class_icons={
+"CardData": "",
+"Counter": "",
 "DragStore": "",
-"GitAPI": ""
+"Eureka": "",
+"GitAPI": "",
+"GlobalBonus": "",
+"Impact": "",
+"PersonalBonus": "",
+"Power": "",
+"Swap": ""
 }
 
 [application]

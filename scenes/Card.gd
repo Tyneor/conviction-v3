@@ -2,12 +2,12 @@ extends Area2D
 
 const DragStore = preload("res://stores/DragStore.tres")
 
-var number = 1
+var data : CardData
 var grabbed_offset : Vector2
 var draggable = false
 
 func _ready():
-	$TextureRect/Label.text = str(number)
+	$TextureRect/Label.text = self.data.name
 	
 func _input(_event):
 	if DragStore.dragged_card == self:
