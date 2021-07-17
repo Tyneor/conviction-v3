@@ -17,5 +17,5 @@ func compare_with(other_card) -> int:
 	if other_card.get_class() == "Argument" and other_card.value >= self.min_value and other_card.value <= self.max_value:
 			return other_card.value
 	if other_card.get_class() in ["Counter", "Swap"]:
-		return self.otherwise.compare_with(other_card)
-	return - other_card.compare_with(self.otherwise)
+		return self.otherwise.compare_with(other_card.otherwise)
+	return self.otherwise.compare_with(other_card)

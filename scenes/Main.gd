@@ -45,7 +45,11 @@ func showdown():
 	var player_card = player.arena.slot.card
 	var opponent_card = opponent.arena.slot.card
 	if player_card and opponent_card: # aka not the first turn
-		ScoreStore.score += player_card.compare_with(opponent_card)
+		match player_card.compare_with(opponent_card):
+			"swap":
+				ScoreStore.score = - ScoreStore.score
+			var score_delta:
+				ScoreStore.score += score_delta
 		var res = ladder.move_auditor()
 		if res is GDScriptFunctionState:
 			yield(res, "completed")
