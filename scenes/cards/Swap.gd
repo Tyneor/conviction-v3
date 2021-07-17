@@ -1,8 +1,6 @@
 class_name Swap extends Card
 func get_class(): return "Swap"
 
-const ScoreStore = preload("res://stores/ScoreStore.tres")
-
 var min_value := 1
 var max_value := 4
 var otherwise : Argument
