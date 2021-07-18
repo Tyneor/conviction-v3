@@ -11,6 +11,7 @@ extents = Vector2( 60, 90 )
 [node name="Deck" type="CenterContainer"]
 margin_right = 120.0
 margin_bottom = 180.0
+mouse_filter = 2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -34,3 +35,5 @@ position = Vector2( 60, 90 )
 shape = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="Slot"]
+
+[connection signal="input_event" from="Slot/Area2D" to="." method="_on_Area2D_input_event"]

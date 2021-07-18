@@ -59,7 +59,7 @@ func _on_Card_input_event(_viewport, event, _shape_idx):
 			DragStore.drag(self)
 			self.z_index = 1
 			self.grabbed_offset = self.global_position - get_global_mouse_position()
-#		get_tree().set_input_as_handled()
+		get_tree().set_input_as_handled()
 		
 	if event.is_action_released("ui_touch"):
 		if not self.has_been_dragged:

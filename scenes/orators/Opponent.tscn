@@ -63,6 +63,7 @@ __meta__ = {
 margin_left = 62.0
 margin_right = 192.0
 margin_bottom = 330.0
+mouse_filter = 2
 custom_constants/separation = 20
 
 [node name="Deck" parent="Panel/Table/Left" instance=ExtResource( 6 )]

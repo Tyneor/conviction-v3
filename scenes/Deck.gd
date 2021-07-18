@@ -1,5 +1,9 @@
 extends CenterContainer
 
+const Theater = preload("res://scenes/Theater.tscn")
+const DeckDetails = preload("res://scenes/DeckDetails.tscn")
+
+export var is_for_player = false
 onready var slot = $Slot
 var cards := [] setget set_cards
 
@@ -20,3 +24,16 @@ func draw_card():
 	if self.cards.size() > 0:
 		slot.card = cards.pop_front()	
 	return old_card
+
+func display_details():
+	var deckDetails = DeckDetails.instance()
+	deckDetails.set_label(
+		self.cards.size() + (1 if slot.card else 0), 
+		is_for_player)
+	var theater = Theater.instance()
+	theater.set_content(deckDetails)
+	self.get_tree().current_scene.add_child(theater)
+
+func _on_Area2D_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("ui_touch"):
+		self.display_details()

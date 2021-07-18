@@ -14,9 +14,7 @@ var auditors = []
 
 func _ready():
 	randomize()
-	var res = self.start_game()
-	if res is GDScriptFunctionState:
-		yield(res, "completed")
+	yield(self.start_game(), "completed")
 	finish_game()
 	
 func start_game():
