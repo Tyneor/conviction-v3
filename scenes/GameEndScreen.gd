@@ -1,8 +1,8 @@
 extends Control
 
-
 func set_label(label):
 	$VBoxContainer/Label.text = label
 
 func _on_MenuButton_pressed():
-	get_tree().change_scene("res://scenes/MenuScreen.tscn")
+	var MenuScreen = load("res://scenes/MenuScreen.tscn").instance()
+	self.get_tree().current_scene.change_scene(MenuScreen)

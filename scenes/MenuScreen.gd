@@ -1,6 +1,5 @@
 extends Control
 
 func _on_PlayButton_pressed():
-	$AnimationPlayer.play("fade_in")
-	yield($AnimationPlayer,"animation_finished")
-	get_tree().change_scene("res://scenes/GameScreen.tscn")
+	var GameScreen = load("res://scenes/GameScreen.tscn").instance()
+	self.get_tree().current_scene.change_scene(GameScreen)
