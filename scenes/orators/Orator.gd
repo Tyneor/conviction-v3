@@ -49,7 +49,6 @@ func draw_card():
 			yield(hand.add_card(card), "completed")
 
 func followers_first_empty_slot():
-	var follower = Auditor.instance()
 	for panel in followers.get_children():
 		if panel.get_child_count() == 0:
 			return panel

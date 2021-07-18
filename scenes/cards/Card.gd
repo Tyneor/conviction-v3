@@ -5,11 +5,16 @@ const DragStore = preload("res://stores/DragStore.tres")
 const Theater = preload("res://scenes/Theater.tscn")
 const CardDetails = preload("res://scenes/cards/CardDetails.tscn")
 
+export var flipped := false setget set_flipped
 var draggable := false
 var grabbed_offset : Vector2
 var has_been_dragged := true
 var label := "Card" setget set_label
 var description : String setget ,get_description
+
+func set_flipped(new_flipped):
+	flipped = new_flipped
+	$TextureRect/Label.visible = self.flipped
 
 func set_label(new_label):
 	label = new_label
@@ -65,10 +70,10 @@ func _on_Card_input_event(_viewport, event, _shape_idx):
 			self.z_index = 0
 
 func display_details():
-	var theater = Theater.instance()
-	var cardDetails = CardDetails.instance()
-	cardDetails.set_label(self.label)
-	cardDetails.set_description(self.description)
-	theater.get_node("CenterContainer").add_child(cardDetails)
-	get_tree().current_scene.add_child(theater)
-	theater.connect("pressed", theater, "queue_free")
+	if self.flipped:
+		var cardDetails = CardDetails.instance()
+		cardDetails.set_label(self.label)
+		cardDetails.set_description(self.description)
+		var theater = Theater.instance()
+		theater.set_content(cardDetails)
+		self.get_tree().current_scene.add_child(theater)

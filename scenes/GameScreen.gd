@@ -1,6 +1,8 @@
 extends Node
 
 const ScoreStore = preload("res://stores/ScoreStore.tres")
+const GameEndScreen = preload("res://scenes/GameEndScreen.tscn")
+const Theater = preload("res://scenes/Theater.tscn")
 const Auditor = preload("res://scenes/Auditor.tscn")
 
 onready var player = $Player
@@ -12,6 +14,12 @@ var auditors = []
 
 func _ready():
 	randomize()
+	var res = self.start_game()
+	if res is GDScriptFunctionState:
+		yield(res, "completed")
+	finish_game()
+	
+func start_game():
 	self.game_running = true
 	for _i in range(7):
 		self.auditors.append(Auditor.instance())
@@ -33,13 +41,6 @@ func _ready():
 				current_orator = player
 			if current_orator.arena.slot.card:
 					current_orator.arena.delete_card()
-	
-	if player.followers_first_empty_slot() == null:
-		$Label.text = "Congratulations,\n you won !"
-	elif opponent.followers_first_empty_slot() == null:
-		$Label.text = "Oh no...,\n you lost"
-	else:
-		$Label.text = "Nobody won,\n something wrong happened ;/"
 
 func showdown():
 	var player_card = player.arena.slot.card
@@ -60,6 +61,13 @@ func showdown():
 			self.finish_current_round(player)
 			self.start_new_round()
 
+func start_new_round():
+	var auditor = auditors.pop_back()
+	if auditor:
+		ladder.auditor = auditor
+		ScoreStore.score = 0
+		ladder.move_auditor()
+
 func finish_current_round(round_winner):
 	var auditor = ladder.auditor
 	auditor.move_to_parent(round_winner.followers_first_empty_slot())
@@ -67,9 +75,15 @@ func finish_current_round(round_winner):
 	if round_winner.followers_first_empty_slot() == null:
 		self.game_running = false
 
-func start_new_round():
-	var auditor = auditors.pop_back()
-	if auditor:
-		ladder.auditor = auditor
-		ScoreStore.score = 0
-		ladder.move_auditor()
+func finish_game():
+	var screen = GameEndScreen.instance()
+	if player.followers_first_empty_slot() == null:
+		screen.set_label("Congratulations,\n you won !")
+	elif opponent.followers_first_empty_slot() == null:
+		screen.set_label("Oh no...,\n you lost")
+	else:
+		screen.set_label("Nobody won,\n something wrong happened ;/")
+	var theater = Theater.instance()
+	theater.set_content(screen)
+	self.get_tree().current_scene.add_child(theater)
+	
