@@ -83,5 +83,4 @@ func finish_game():
 		screen.set_label("Nobody won,\n something wrong happened ;/")
 	var theater = Theater.instance()
 	theater.set_content(screen)
-	self.get_tree().current_scene.add_child(theater)
-	
+	self.add_child(theater)

@@ -76,4 +76,6 @@ func display_details():
 		cardDetails.set_description(self.description)
 		var theater = Theater.instance()
 		theater.set_content(cardDetails)
-		self.get_tree().current_scene.add_child(theater)
+		var gameScreen = self.find_parent("GameScreen")
+		if gameScreen:
+			gameScreen.add_child(theater)

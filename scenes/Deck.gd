@@ -32,7 +32,9 @@ func display_details():
 		is_for_player)
 	var theater = Theater.instance()
 	theater.set_content(deckDetails)
-	self.get_tree().current_scene.add_child(theater)
+	var gameScreen = self.find_parent("GameScreen")
+	if gameScreen:
+		gameScreen.add_child(theater)
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("ui_touch"):
