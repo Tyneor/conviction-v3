@@ -51,24 +51,26 @@ func _input(event):
 	if event is InputEventMouseMotion and DragStore.dragged_card == self:
 		self.has_been_dragged = true
 		self.global_position = get_global_mouse_position() + self.grabbed_offset
+		
+	if event.is_action_released("ui_touch"):
+		if not self.has_been_dragged:
+			self.has_been_dragged = true
+			self.display_details()
 
-func _on_Card_input_event(_viewport, event, _shape_idx):
+		if DragStore.dragged_card == self:
+			var duration = DragStore.drop()
+			yield(get_tree().create_timer(duration), "timeout")
+			self.z_index = 0
+		
+func _input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed("ui_touch"):
 		self.has_been_dragged = false
 		if draggable && DragStore.dragged_card == null:
 			DragStore.drag(self)
 			self.z_index = 1
 			self.grabbed_offset = self.global_position - get_global_mouse_position()
-		get_tree().set_input_as_handled()
+		get_tree().set_input_as_handled()	
 		
-	if event.is_action_released("ui_touch"):
-		if not self.has_been_dragged:
-			self.display_details()
-		if DragStore.dragged_card == self:
-			var duration = DragStore.drop()
-			yield(get_tree().create_timer(duration), "timeout")
-			self.z_index = 0
-
 func display_details():
 	if self.flipped:
 		var cardDetails = CardDetails.instance()

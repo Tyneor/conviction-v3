@@ -132,5 +132,3 @@ shape = SubResource( 3 )
 anims/Draw = SubResource( 4 )
 anims/DrawWithoutFlip = SubResource( 5 )
 anims/Reveal = SubResource( 6 )
-
-[connection signal="input_event" from="." to="." method="_on_Card_input_event"]

@@ -5,13 +5,17 @@ var dragged_card = null
 var slots = []
 
 func add_slot(slot):
-	slots.append(slot)
+	if not slots.has(slot):
+		slots.append(slot)
+	
+func remove_slot(slot):
+	slots.erase(slot)
 
 func drag(card):
 	dragged_card = card
 
 func drop():
-	var new_slot = null
+	var new_slot
 	for slot in slots:
 		if slot.is_in_drop_range(dragged_card):
 			new_slot = slot

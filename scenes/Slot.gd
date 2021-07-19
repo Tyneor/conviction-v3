@@ -5,13 +5,17 @@ const DragStore = preload("res://stores/DragStore.tres")
 signal card_dropped
 onready var tween = $Tween
 var card = null setget set_card
-var droppable = false
+var droppable = false setget set_droppable
 
-func _ready():
-	DragStore.add_slot(self)
+func _exit_tree():
+	DragStore.remove_slot(self)	
 
-func is_in_drop_range(new_card):
-	return droppable and new_card in $Area2D.get_overlapping_areas()
+func set_droppable(new_droppable):
+	droppable = new_droppable
+	if droppable:
+		DragStore.add_slot(self)
+	else:
+		DragStore.remove_slot(self)
 
 func set_card(new_card):
 	card = new_card
@@ -22,6 +26,9 @@ func delete_card():
 	card.queue_free()
 	# self.remove_child(card)
 	card = null
+
+func is_in_drop_range(new_card):
+	return droppable and new_card in $Area2D.get_overlapping_areas()
 
 func drop_in(new_card):
 	assert(card == null, "dropped a card on a non-empty slot")
