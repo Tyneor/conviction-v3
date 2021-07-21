@@ -19,8 +19,11 @@ func _ready():
 	
 func start_game():
 	self.game_running = true
-	for _i in range(7):
+	var winning_nb_followers = 4
+	for _i in range(winning_nb_followers * 2 - 1):
 		self.auditors.append(Auditor.instance())
+	self.player.followers.max_followers = winning_nb_followers
+	self.opponent.followers.max_followers = winning_nb_followers
 	self.start_new_round()
 	self.player.start_set()
 	self.opponent.start_set()
@@ -68,16 +71,17 @@ func start_new_round():
 
 func finish_current_round(round_winner):
 	var auditor = ladder.auditor
-	auditor.move_to_parent(round_winner.followers_first_empty_slot())
+	round_winner.followers.add_follower(auditor)
 	ladder.auditor = null
-	if round_winner.followers_first_empty_slot() == null:
+	if round_winner.followers.is_full():
 		self.game_running = false
 
 func finish_game():
+	print("finish game")
 	var screen = GameEndScreen.instance()
-	if player.followers_first_empty_slot() == null:
+	if player.followers.is_full():
 		screen.set_label("Congratulations,\n you won !")
-	elif opponent.followers_first_empty_slot() == null:
+	elif opponent.followers.is_full():
 		screen.set_label("Oh no...,\n you lost")
 	else:
 		screen.set_label("Nobody won,\n something wrong happened ;/")

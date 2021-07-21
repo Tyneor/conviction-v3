@@ -22,7 +22,7 @@ func start_set():
 
 func reset_deck():
 	var cards = []
-	for i in range(7):
+	for i in range(100, 200):
 		var argument = ArgumentScn.instance()
 		argument.value = i
 		cards.append(argument)
@@ -47,12 +47,6 @@ func draw_card():
 		var card = deck.draw_card()
 		if card:
 			yield(hand.add_card(card), "completed")
-
-func followers_first_empty_slot():
-	for panel in followers.get_children():
-		if panel.get_child_count() == 0:
-			return panel
-	return null
 
 func _on_Arena_card_played():
 	emit_signal("card_played")

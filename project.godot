@@ -69,8 +69,12 @@ _global_script_class_icons={
 [application]
 
 config/name="conviction-android"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/MenuScreen.tscn"
 config/icon="res://assets/icon.png"
+
+[autoload]
+
+SceneSwitcher="*res://SceneSwitcher.tscn"
 
 [display]
 

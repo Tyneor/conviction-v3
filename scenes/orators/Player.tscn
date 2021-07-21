@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/Arena.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Deck.tscn" type="PackedScene" id=5]
 [ext_resource path="res://shaders/BorderRadius.shader" type="Shader" id=6]
+[ext_resource path="res://scenes/Followers.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
@@ -16,8 +17,6 @@ shader_param/size = Vector2( 945, 380 )
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 2048, 2048 )
-
-[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="Player" type="Node"]
 script = ExtResource( 2 )
@@ -56,6 +55,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = -165.0
 margin_bottom = 165.0
+grow_vertical = 0
 mouse_filter = 2
 custom_constants/separation = 30
 alignment = 1
@@ -71,20 +71,10 @@ mouse_filter = 2
 custom_constants/separation = 20
 alignment = 2
 
-[node name="Followers" type="GridContainer" parent="Panel/Table/Left"]
-margin_top = 70.0
+[node name="Followers" parent="Panel/Table/Left" instance=ExtResource( 7 )]
+margin_top = 130.0
 margin_right = 120.0
 margin_bottom = 130.0
-rect_min_size = Vector2( 0, 60 )
-custom_constants/vseparation = 10
-custom_constants/hseparation = 10
-columns = 2
-
-[node name="Panel" type="Panel" parent="Panel/Table/Left/Followers"]
-margin_right = 60.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 60, 60 )
-custom_styles/panel = SubResource( 3 )
 
 [node name="Deck" parent="Panel/Table/Left" instance=ExtResource( 5 )]
 margin_top = 150.0
