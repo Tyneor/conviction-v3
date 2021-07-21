@@ -77,7 +77,6 @@ func finish_current_round(round_winner):
 		self.game_running = false
 
 func finish_game():
-	print("finish game")
 	var screen = GameEndScreen.instance()
 	if player.followers.is_full():
 		screen.set_label("Congratulations,\n you won !")
@@ -87,4 +86,4 @@ func finish_game():
 		screen.set_label("Nobody won,\n something wrong happened ;/")
 	var theater = Theater.instance()
 	theater.set_content(screen)
-	self.add_child(theater)
+	get_tree().current_scene.add_child(theater)

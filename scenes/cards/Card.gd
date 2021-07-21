@@ -34,7 +34,7 @@ func play_draw_animation(duration=1, flip_card=true):
 	else:
 		$AnimationPlayer.play("DrawWithoutFlip")
 	if duration > 0:
-		$AnimationPlayer.playback_speed = 1 / duration
+		$AnimationPlayer.playback_speed = 1.0 / duration
 	else:
 		pass
 #		$AnimationPlayer.advance(1)
@@ -42,7 +42,7 @@ func play_draw_animation(duration=1, flip_card=true):
 
 func play_reveal_animation(duration=1):
 	if duration > 0:
-		$AnimationPlayer.playback_speed = 1 / duration
+		$AnimationPlayer.playback_speed = 1.0 / duration
 	$AnimationPlayer.play("Reveal")
 	yield($AnimationPlayer, "animation_finished")
 
@@ -78,6 +78,4 @@ func display_details():
 		cardDetails.set_description(self.description)
 		var theater = Theater.instance()
 		theater.set_content(cardDetails)
-		var gameScreen = self.find_parent("GameScreen")
-		if gameScreen:
-			gameScreen.add_child(theater)
+		get_tree().current_scene.add_child(theater)

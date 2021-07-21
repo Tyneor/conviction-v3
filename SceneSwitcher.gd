@@ -14,7 +14,6 @@ func _ready():
 	current_scene = root.get_child(root.get_child_count() - 1)
 
 func change_scene(path):
-	print("test")
 	animationPlayer.play("FadeIn")
 	yield(animationPlayer, "animation_finished")
 	current_scene.queue_free()

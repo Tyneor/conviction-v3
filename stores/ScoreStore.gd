@@ -1,5 +1,4 @@
 extends Resource
-class_name ScoreStore
 
 var score := 0 setget set_score
 var min_score := 0 # opponent won

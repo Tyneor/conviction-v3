@@ -1,5 +1,4 @@
 extends Resource
-class_name DragStore
 
 var dragged_card = null
 var slots = []

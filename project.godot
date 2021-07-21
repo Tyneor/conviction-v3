@@ -24,11 +24,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/cards/Counter.gd"
 }, {
-"base": "Resource",
-"class": "DragStore",
-"language": "GDScript",
-"path": "res://stores/DragStore.gd"
-}, {
 "base": "Card",
 "class": "Eureka",
 "language": "GDScript",
@@ -44,11 +39,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/orators/Orator.gd"
 }, {
-"base": "Resource",
-"class": "ScoreStore",
-"language": "GDScript",
-"path": "res://stores/ScoreStore.gd"
-}, {
 "base": "Card",
 "class": "Swap",
 "language": "GDScript",
@@ -58,11 +48,9 @@ _global_script_class_icons={
 "Argument": "",
 "Card": "",
 "Counter": "",
-"DragStore": "",
 "Eureka": "",
 "GitAPI": "",
 "Orator": "",
-"ScoreStore": "",
 "Swap": ""
 }
 
