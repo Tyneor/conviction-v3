@@ -22,7 +22,7 @@ func start_set():
 
 func reset_deck():
 	var cards = []
-	for i in range(100, 200):
+	for i in range(7):
 		var argument = ArgumentScn.instance()
 		argument.value = i
 		cards.append(argument)
