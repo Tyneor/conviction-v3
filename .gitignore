@@ -5,3 +5,6 @@
 bin/
 build/
 lib/
+
+# Passwords
+export_presets.cfg
