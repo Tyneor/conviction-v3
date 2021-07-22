@@ -8,3 +8,5 @@ lib/
 
 # Passwords
 export_presets.cfg
+*.apk
+*.apk.idsig
