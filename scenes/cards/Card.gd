@@ -22,6 +22,9 @@ func set_label(new_label):
 	if get_node_or_null("TextureRect/Label"):
 		$TextureRect/Label.text = self.label
 
+func set_font_size(new_font_size):
+	$TextureRect/Label.get("custom_fonts/font").set_size(new_font_size)
+
 func get_description():
 	return "Description"
 	
@@ -67,7 +70,7 @@ func _input_event(_viewport, event, _shape_idx):
 		self.has_been_dragged = false
 		if draggable && DragStore.dragged_card == null:
 			DragStore.drag(self)
-			self.z_index = 1
+			self.z_index = 2
 			self.grabbed_offset = self.global_position - get_global_mouse_position()
 		get_tree().set_input_as_handled()	
 		

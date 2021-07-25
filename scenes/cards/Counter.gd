@@ -11,6 +11,7 @@ func _init():
 
 func _ready():
 	self.label = self.get_class()
+	self.set_font_size(40)
 	
 func get_description():
 	return "If the opponent card is between %d and %d you gain its value, otherwise, %s" % [self.min_value, self.max_value, self.otherwise.description]

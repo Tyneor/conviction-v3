@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://assets/Montserrat/Montserrat-Medium.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/textures/brown_age_by_darkwood67.jpg" type="Texture" id=2]
 [ext_resource path="res://shaders/BorderRadius.shader" type="Shader" id=3]
 [ext_resource path="res://scenes/cards/Card.gd" type="Script" id=4]
@@ -10,7 +11,11 @@ shader_param/color = Color( 1, 1, 1, 1 )
 shader_param/radius = 0.2
 shader_param/size = Vector2( 200, 300 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="DynamicFont" id=7]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 100, 150 )
 
 [sub_resource type="Animation" id=3]
@@ -110,6 +115,7 @@ margin_left = -98.0
 margin_top = -42.0
 margin_right = 99.0
 margin_bottom = 43.0
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.298039, 0.25098, 0.196078, 1 )
 text = "Label"
 align = 1
@@ -120,7 +126,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Draw = SubResource( 3 )
