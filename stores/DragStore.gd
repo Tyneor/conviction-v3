@@ -1,5 +1,8 @@
 extends Resource
 
+signal card_dragged(card)
+signal card_dropped(card)
+
 var dragged_card = null
 var slots = []
 
@@ -11,9 +14,11 @@ func remove_slot(slot):
 	slots.erase(slot)
 
 func drag(card):
+	emit_signal("card_dragged", card)
 	dragged_card = card
 
 func drop():
+	emit_signal("card_dropped")
 	var new_slot
 	for slot in slots:
 		if slot.is_in_drop_range(dragged_card):

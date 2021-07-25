@@ -70,7 +70,7 @@ func _input_event(_viewport, event, _shape_idx):
 		self.has_been_dragged = false
 		if draggable && DragStore.dragged_card == null:
 			DragStore.drag(self)
-			self.z_index = 2
+			self.z_index = 1
 			self.grabbed_offset = self.global_position - get_global_mouse_position()
 		get_tree().set_input_as_handled()	
 		

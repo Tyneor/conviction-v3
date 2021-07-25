@@ -24,7 +24,6 @@ func set_width(new_width: int):
 	if max(new_width, 20) != self.width:
 		width = max(new_width, 20)
 		if self.width > self.circle_radius * 2:
-			print(self.width, " ", self.circle_radius)
 			self.circle_radius = self.width / 2
 		self._calculate_vec2_array()
 

@@ -1,5 +1,6 @@
 extends Node
 
+const DragStore = preload("res://stores/DragStore.tres")
 const ScoreStore = preload("res://stores/ScoreStore.tres")
 const GameEndScreen = preload("res://scenes/screens/GameEndScreen.tscn")
 const Theater = preload("res://scenes/Theater.tscn")
@@ -28,6 +29,9 @@ func start_game():
 	self.player.start_set()
 	self.opponent.start_set()
 	self.current_orator = player
+	
+	DragStore.connect("card_dragged", self, "on_Card_dragged")
+	DragStore.connect("card_dropped", self, "on_Card_dropped")
 
 	while self.game_running:
 		yield(current_orator.start_turn(), "completed")
@@ -43,15 +47,18 @@ func start_game():
 			if current_orator.arena.slot.card:
 					current_orator.arena.delete_card()
 
+func on_Card_dragged(card):
+	var new_score = self._calcultate_next_score(card, opponent.arena.slot.card)
+	if new_score != null and player.arena.slot.card == null:
+		self.ladder.draw_arrow_to(new_score)
+		
+func on_Card_dropped():
+	self.ladder.hide_arrow()
+
 func showdown():
-	var player_card = player.arena.slot.card
-	var opponent_card = opponent.arena.slot.card
-	if player_card and opponent_card: # aka not the first turn
-		match player_card.compare_with(opponent_card):
-			"swap":
-				ScoreStore.score = - ScoreStore.score
-			var score_delta:
-				ScoreStore.score += score_delta
+	var new_score = self._calcultate_next_score(player.arena.slot.card, opponent.arena.slot.card)
+	if new_score != null:
+		ScoreStore.score = new_score
 		var res = ladder.move_auditor()
 		if res is GDScriptFunctionState:
 			yield(res, "completed")
@@ -62,6 +69,15 @@ func showdown():
 			self.finish_current_round(player)
 			self.start_new_round()
 
+func _calcultate_next_score(player_card, opponent_card):
+	if player_card and opponent_card: # aka not the first turn
+		match player_card.compare_with(opponent_card):
+			"swap":
+				return - ScoreStore.score
+			var score_delta:
+				return clamp(ScoreStore.score + score_delta, ScoreStore.min_score, ScoreStore.max_score)
+	return null
+	
 func start_new_round():
 	var auditor = auditors.pop_back()
 	if auditor:
