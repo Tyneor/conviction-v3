@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/Slot.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Hand.gd" type="Script" id=3]
+[ext_resource path="res://scenes/orators/children/Slot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/orators/children/Hand.gd" type="Script" id=3]
 
 [node name="Hand" type="CenterContainer"]
 mouse_filter = 2

@@ -4,7 +4,7 @@ const ArgumentScn = preload("res://scenes/cards/Argument.tscn")
 const CounterScn = preload("res://scenes/cards/Counter.tscn")
 const SwapScn = preload("res://scenes/cards/Swap.tscn")
 const EurekaScn = preload("res://scenes/cards/Eureka.tscn")
-const Auditor = preload("res://scenes/Auditor.tscn")
+const Auditor = preload("res://scenes/ladders/Auditor.tscn")
 
 signal card_played
 

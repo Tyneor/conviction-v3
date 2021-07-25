@@ -1,6 +1,6 @@
 extends CenterContainer
 
-const Slot = preload("res://scenes/Slot.gd")
+const Slot = preload("res://scenes/orators/children/Slot.gd")
 
 export var is_for_player = false
 onready var slots = $SlotContainer.get_children()

@@ -2,11 +2,11 @@
 
 [ext_resource path="res://assets/textures/wood-clean-seamless-handcrafted.jpg" type="Texture" id=1]
 [ext_resource path="res://scenes/orators/Player.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Hand.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/Arena.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Deck.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/orators/children/Hand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/orators/children/Arena.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/orators/children/Deck.tscn" type="PackedScene" id=5]
 [ext_resource path="res://shaders/BorderRadius.shader" type="Shader" id=6]
-[ext_resource path="res://scenes/Followers.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/orators/children/Followers.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )

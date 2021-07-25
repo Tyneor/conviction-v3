@@ -1,7 +1,7 @@
 extends CenterContainer
 
 const Theater = preload("res://scenes/Theater.tscn")
-const DeckDetails = preload("res://scenes/DeckDetails.tscn")
+const DeckDetails = preload("res://scenes/orators/children/DeckDetails.tscn")
 
 export var is_for_player = false
 onready var slot = $Slot

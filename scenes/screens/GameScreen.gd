@@ -1,9 +1,9 @@
 extends Node
 
 const ScoreStore = preload("res://stores/ScoreStore.tres")
-const GameEndScreen = preload("res://scenes/GameEndScreen.tscn")
+const GameEndScreen = preload("res://scenes/screens/GameEndScreen.tscn")
 const Theater = preload("res://scenes/Theater.tscn")
-const Auditor = preload("res://scenes/Auditor.tscn")
+const Auditor = preload("res://scenes/ladders/Auditor.tscn")
 
 onready var player = $Player
 onready var opponent = $Opponent
@@ -65,8 +65,8 @@ func showdown():
 func start_new_round():
 	var auditor = auditors.pop_back()
 	if auditor:
-		ladder.auditor = auditor
 		ScoreStore.score = 0
+		ladder.auditor = auditor
 		ladder.move_auditor()
 
 func finish_current_round(round_winner):

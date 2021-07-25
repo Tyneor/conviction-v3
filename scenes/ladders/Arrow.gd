@@ -1,9 +1,14 @@
-extends Node2D
+class_name Arrow extends Node2D
 
-var length = 200 setget set_length
-var width = 70 setget set_width
-var circle_radius = 50 setget set_circle_radius
-var vec2_array = []
+var length : int setget set_length
+var width : int setget set_width
+var circle_radius : int setget set_circle_radius
+var vec2_array : PoolVector2Array
+
+func _init(new_length=0, new_width=30, new_circle_radius=20):
+	self.length = new_length
+	self.width = new_width
+	self.circle_radius = new_circle_radius
 
 func _ready():
 	self._calculate_vec2_array()
@@ -51,14 +56,5 @@ func _calculate_vec2_array():
 	self.update()
 
 func _draw():
-	draw_polygon(self.vec2_array, PoolColorArray(), [])
+	draw_colored_polygon(self.vec2_array, Color(1, 1, 1), [])
 	draw_circle(Vector2(0, 0), self.circle_radius, Color(1, 1, 1))
-
-func _input(event):
-	if event is InputEventMouseButton:
-		print("click")
-		self.circle_radius -= 10
-	elif event is InputEventMouseMotion:
-		print("motion")
-#		self.width = (event.position - self.position).x
-		self.length = (event.position - self.position).y
