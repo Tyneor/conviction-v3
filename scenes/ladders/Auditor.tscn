@@ -28,3 +28,5 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
+
+[connection signal="gui_input" from="Panel" to="." method="_on_Panel_gui_input"]

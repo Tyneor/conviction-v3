@@ -1,6 +1,11 @@
 extends Node2D
 
+const AuditorDetails = preload("res://scenes/ladders/AuditorDetails.tscn")
+const Theater = preload("res://scenes/Theater.tscn")
+
 onready var tween = $Tween
+var first_name := "Firstname"
+var index := 0
 
 func move_to_parent(target: Control, speed=300):
 	var source = self.get_parent() # null if no previous parent
@@ -23,3 +28,14 @@ func move_to_parent(target: Control, speed=300):
 		target.add_child(self)
 		self.position = target.rect_size / 2
 		self.z_index = 0
+
+func display_details():
+	var auditorDetails = AuditorDetails.instance()
+	auditorDetails.set_label(self.first_name, self.index)
+	var theater = Theater.instance()
+	theater.set_content(auditorDetails)
+	get_tree().current_scene.add_child(theater)
+
+func _on_Panel_gui_input(event : InputEvent):
+	if event.is_action_pressed("ui_touch"):
+		self.display_details()
