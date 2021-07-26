@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/screens/GameScreen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/orators/Opponent.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/orators/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/ladders/Ladder.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ladders/PersonalLadder.tscn" type="PackedScene" id=4]
 
 [node name="GameScreen" type="Node"]
 script = ExtResource( 1 )
@@ -21,4 +21,4 @@ __meta__ = {
 
 [node name="Opponent" parent="." instance=ExtResource( 2 )]
 
-[node name="Ladder" parent="." instance=ExtResource( 4 )]
+[node name="PersonalLadder" parent="." instance=ExtResource( 4 )]

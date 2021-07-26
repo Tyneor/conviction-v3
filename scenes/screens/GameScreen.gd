@@ -8,10 +8,10 @@ const Auditor = preload("res://scenes/ladders/Auditor.tscn")
 
 onready var player = $Player
 onready var opponent = $Opponent
-onready var ladder = $Ladder
+onready var personal_ladder = $PersonalLadder
 var game_running = false
 var current_orator
-var auditors = []
+var auditors := []
 
 func _ready():
 	randomize()
@@ -21,8 +21,11 @@ func _ready():
 func start_game():
 	self.game_running = true
 	var winning_nb_followers = 4
-	for _i in range(winning_nb_followers * 2 - 1):
-		self.auditors.append(Auditor.instance())
+	for i in range(winning_nb_followers * 2 - 1):
+		var auditor = Auditor.instance()
+		auditor.first_name = "Auditor"
+		auditor.index = i
+		self.auditors.append(auditor)
 	self.player.followers.max_followers = winning_nb_followers
 	self.opponent.followers.max_followers = winning_nb_followers
 	self.start_new_round()
@@ -51,15 +54,15 @@ func start_game():
 func on_Card_dragged(card):
 	var new_score = self._calcultate_next_score(card, opponent.arena.slot.card)
 	if player.arena.slot.card == null:
-		self.ladder.draw_arrow_to(new_score)
+		personal_ladder.draw_arrow(new_score)
 		
 func on_Card_dropped():
-	self.ladder.hide_arrow()
+	personal_ladder.hide_arrow()
 
 func showdown():
 	var new_score = self._calcultate_next_score(player.arena.slot.card, opponent.arena.slot.card)
 	ScoreStore.score = new_score
-	var res = ladder.move_auditor()
+	var res = personal_ladder.move_auditor()
 	if res is GDScriptFunctionState:
 		yield(res, "completed")
 	if ScoreStore.score == ScoreStore.min_score:
@@ -79,16 +82,16 @@ func _calcultate_next_score(player_card, opponent_card) -> int:
 	return 0
 	
 func start_new_round():
-	var auditor = auditors.pop_back()
+	var auditor = auditors.pop_front()
 	if auditor:
 		ScoreStore.score = 0
-		ladder.auditor = auditor
-		ladder.move_auditor()
+		personal_ladder.auditor = auditor
+		personal_ladder.move_auditor()
 
 func finish_current_round(round_winner):
-	var auditor = ladder.auditor
+	var auditor = personal_ladder.auditor
 	round_winner.followers.add_follower(auditor)
-	ladder.auditor = null
+	personal_ladder.auditor = null
 	if round_winner.followers.is_full():
 		self.game_running = false
 
