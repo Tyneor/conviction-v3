@@ -4,6 +4,7 @@ const DragStore = preload("res://stores/DragStore.tres")
 
 signal card_dropped
 onready var tween = $Tween
+var previous_card : Area2D
 var card = null setget set_card
 var droppable = false setget set_droppable
 
@@ -22,9 +23,17 @@ func set_card(new_card):
 	self.add_child(card)
 	card.position = self.rect_size / 2
 
+func delete_previous_card():
+	if previous_card:
+		previous_card.queue_free()
+		previous_card = null
+
 func delete_card():
-	card.queue_free()
-	# self.remove_child(card)
+	if previous_card != null:
+		previous_card.queue_free()
+		previous_card = null
+	previous_card = card
+	previous_card.modulate.a = 0.5
 	card = null
 
 func is_in_drop_range(new_card):

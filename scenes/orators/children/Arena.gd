@@ -1,7 +1,8 @@
 extends Control
 
-export var is_for_player = false
 signal card_played
+
+export var is_for_player = false
 onready var slot = $Slot
 
 func add_card(card):
@@ -15,6 +16,9 @@ func add_card(card):
 
 func delete_card():
 	self.slot.delete_card()
+	
+func delete_previous_card():
+	self.slot.delete_previous_card()
 
 func _on_Slot_card_dropped():
 	if is_for_player:

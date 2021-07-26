@@ -35,6 +35,7 @@ func start_game():
 
 	while self.game_running:
 		yield(current_orator.start_turn(), "completed")
+		current_orator.arena.delete_previous_card()
 		var res = self.showdown()
 		if res is GDScriptFunctionState:
 			yield(res, "completed")
@@ -49,7 +50,7 @@ func start_game():
 
 func on_Card_dragged(card):
 	var new_score = self._calcultate_next_score(card, opponent.arena.slot.card)
-	if new_score != null and player.arena.slot.card == null:
+	if player.arena.slot.card == null:
 		self.ladder.draw_arrow_to(new_score)
 		
 func on_Card_dropped():
@@ -57,26 +58,25 @@ func on_Card_dropped():
 
 func showdown():
 	var new_score = self._calcultate_next_score(player.arena.slot.card, opponent.arena.slot.card)
-	if new_score != null:
-		ScoreStore.score = new_score
-		var res = ladder.move_auditor()
-		if res is GDScriptFunctionState:
-			yield(res, "completed")
-		if ScoreStore.score == ScoreStore.min_score:
-			self.finish_current_round(opponent)
-			self.start_new_round()
-		if ScoreStore.score == ScoreStore.max_score:
-			self.finish_current_round(player)
-			self.start_new_round()
+	ScoreStore.score = new_score
+	var res = ladder.move_auditor()
+	if res is GDScriptFunctionState:
+		yield(res, "completed")
+	if ScoreStore.score == ScoreStore.min_score:
+		self.finish_current_round(opponent)
+		self.start_new_round()
+	if ScoreStore.score == ScoreStore.max_score:
+		self.finish_current_round(player)
+		self.start_new_round()
 
-func _calcultate_next_score(player_card, opponent_card):
+func _calcultate_next_score(player_card, opponent_card) -> int:
 	if player_card and opponent_card: # aka not the first turn
 		match player_card.compare_with(opponent_card):
 			"swap":
 				return - ScoreStore.score
 			var score_delta:
-				return clamp(ScoreStore.score + score_delta, ScoreStore.min_score, ScoreStore.max_score)
-	return null
+				return int(clamp(ScoreStore.score + score_delta, ScoreStore.min_score, ScoreStore.max_score))
+	return 0
 	
 func start_new_round():
 	var auditor = auditors.pop_back()
