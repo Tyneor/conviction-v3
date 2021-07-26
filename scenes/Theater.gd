@@ -1,7 +1,7 @@
-extends Button
+extends CanvasLayer
 
 func set_content(node : Node):
-	self.add_child(node)
+	$Button.add_child(node)
 
-func _on_Theater_pressed():
+func _on_Button_pressed():
 	self.queue_free()
