@@ -58,17 +58,19 @@ func on_Card_dragged(card):
 	var new_global_score = self._calculate_next_global_score(card)
 	if player.arena.slot.card == null:
 		personal_ladder.draw_arrow(new_personal_score)
-		global_ladder.draw_arrow(new_global_score)
+		if global_ladder.auditor != null:
+			global_ladder.draw_arrow(new_global_score)
 		
 func on_Card_dropped():
 	personal_ladder.hide_arrow()
 	global_ladder.hide_arrow()
 
 func showdown():
-	ScoreStore.global_score = self._calculate_next_global_score(current_orator.arena.slot.card)
-	var g_res = global_ladder.move_auditor()
-	if g_res is GDScriptFunctionState:
-		yield(g_res, "completed")
+	if global_ladder.auditor != null:
+		ScoreStore.global_score = self._calculate_next_global_score(current_orator.arena.slot.card)
+		var g_res = global_ladder.move_auditor()
+		if g_res is GDScriptFunctionState:
+			yield(g_res, "completed")
 	
 	ScoreStore.personal_score = self._calculate_next_personal_score(player.arena.slot.card, opponent.arena.slot.card)
 	var p_res = personal_ladder.move_auditor()
@@ -121,11 +123,12 @@ func finish_current_round(round_winner):
 func finish_game():
 	var screen = GameEndScreen.instance()
 	if player.followers.is_full():
-		screen.set_label("Congratulations,\n you won !")
+		screen.set_label("You won !")
 	elif opponent.followers.is_full():
-		screen.set_label("Oh no...,\n you lost")
+		screen.set_label("You lost ...")
 	else:
-		screen.set_label("Nobody won,\n something wrong happened ;/")
+		screen.set_label("Nobody won")
+	screen.set_game_score(player.followers.nb_followers, opponent.followers.nb_followers)
 	var theater = Theater.instance()
 	theater.set_content(screen)
 	get_tree().current_scene.add_child(theater)
