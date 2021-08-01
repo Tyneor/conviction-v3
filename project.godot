@@ -19,10 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/ladders/Arrow.gd"
 }, {
-"base": "Area2D",
+"base": "ClickableArea",
 "class": "Card",
 "language": "GDScript",
 "path": "res://scenes/cards/Card.gd"
+}, {
+"base": "Area2D",
+"class": "ClickableArea",
+"language": "GDScript",
+"path": "res://scenes/ClickableArea.gd"
+}, {
+"base": "Button",
+"class": "ClickableButton",
+"language": "GDScript",
+"path": "res://scenes/ClickableButton.gd"
 }, {
 "base": "Card",
 "class": "Counter",
@@ -53,6 +63,8 @@ _global_script_class_icons={
 "Argument": "",
 "Arrow": "",
 "Card": "",
+"ClickableArea": "",
+"ClickableButton": "",
 "Counter": "",
 "Eureka": "",
 "GitAPI": "",
@@ -86,6 +98,7 @@ singletons=[ "res://git_api.gdnlib" ]
 
 [gui]
 
+theme/custom="res://assets/DefaultTheme.tres"
 theme/custom_font="res://assets/Montserrat64.tres"
 
 [input]

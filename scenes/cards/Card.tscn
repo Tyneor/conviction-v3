@@ -11,14 +11,14 @@ shader_param/color = Color( 1, 1, 1, 1 )
 shader_param/radius = 0.2
 shader_param/size = Vector2( 200, 300 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=2]
 size = 64
 font_data = ExtResource( 1 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 100, 150 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureRect:rect_scale")
 tracks/0/interp = 1
@@ -44,7 +44,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureRect:rect_scale")
 tracks/0/interp = 1
@@ -58,7 +58,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0.6, 0.6 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureRect:rect_scale")
 tracks/0/interp = 1
@@ -115,7 +115,7 @@ margin_left = -98.0
 margin_top = -42.0
 margin_right = 99.0
 margin_bottom = 43.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.298039, 0.25098, 0.196078, 1 )
 text = "Label"
 align = 1
@@ -126,9 +126,9 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Draw = SubResource( 3 )
-anims/DrawWithoutFlip = SubResource( 4 )
-anims/Reveal = SubResource( 5 )
+anims/Draw = SubResource( 8 )
+anims/DrawWithoutFlip = SubResource( 9 )
+anims/Reveal = SubResource( 6 )

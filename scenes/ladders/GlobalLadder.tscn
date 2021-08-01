@@ -18,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -84.0
 margin_right = -44.0
+mouse_filter = 2
 custom_constants/separation = 27
 alignment = 1
 __meta__ = {
@@ -30,6 +31,7 @@ margin_top = 538.0
 margin_right = 40.0
 margin_bottom = 578.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -39,6 +41,7 @@ margin_top = 605.0
 margin_right = 40.0
 margin_bottom = 645.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -48,6 +51,7 @@ margin_top = 672.0
 margin_right = 40.0
 margin_bottom = 712.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -57,6 +61,7 @@ margin_top = 739.0
 margin_right = 40.0
 margin_bottom = 779.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -66,6 +71,7 @@ margin_top = 806.0
 margin_right = 40.0
 margin_bottom = 846.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -75,6 +81,7 @@ margin_top = 873.0
 margin_right = 40.0
 margin_bottom = 913.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -84,6 +91,7 @@ margin_top = 940.0
 margin_right = 40.0
 margin_bottom = 980.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
 [node name="Step" type="Panel" parent="StepsContainer"]
@@ -92,6 +100,7 @@ margin_top = 1007.0
 margin_right = 40.0
 margin_bottom = 1047.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -101,6 +110,7 @@ margin_top = 1074.0
 margin_right = 40.0
 margin_bottom = 1114.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -110,6 +120,7 @@ margin_top = 1141.0
 margin_right = 40.0
 margin_bottom = 1181.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -119,6 +130,7 @@ margin_top = 1208.0
 margin_right = 40.0
 margin_bottom = 1248.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -128,6 +140,7 @@ margin_top = 1275.0
 margin_right = 40.0
 margin_bottom = 1315.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 
@@ -137,6 +150,7 @@ margin_top = 1342.0
 margin_right = 40.0
 margin_bottom = 1382.0
 rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
 size_flags_horizontal = 0
 custom_styles/panel = SubResource( 1 )
 

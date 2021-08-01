@@ -1,4 +1,4 @@
-extends Node2D
+extends ClickableArea
 
 const AuditorDetails = preload("res://scenes/ladders/AuditorDetails.tscn")
 const Theater = preload("res://scenes/Theater.tscn")
@@ -6,6 +6,9 @@ const Theater = preload("res://scenes/Theater.tscn")
 onready var tween = $Tween
 var first_name := "Firstname"
 var index := 0
+
+func _ready():
+	self.connect("pressed", self, "display_details")
 
 func set_color(color):
 	$Panel.modulate = color
@@ -38,7 +41,3 @@ func display_details():
 	var theater = Theater.instance()
 	theater.set_content(auditorDetails)
 	get_tree().current_scene.add_child(theater)
-
-func _on_Panel_gui_input(event : InputEvent):
-	if event.is_action_pressed("ui_touch"):
-		self.display_details()

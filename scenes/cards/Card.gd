@@ -1,4 +1,4 @@
-class_name Card extends Area2D
+class_name Card extends ClickableArea
 func get_class(): return "Card"
 
 const DragStore = preload("res://stores/DragStore.tres")
@@ -6,7 +6,7 @@ const Theater = preload("res://scenes/Theater.tscn")
 const CardDetails = preload("res://scenes/cards/CardDetails.tscn")
 
 export var flipped := false setget set_flipped
-var draggable := false
+#var draggable := false # in parent clickable area
 var grabbed_offset : Vector2
 var has_been_dragged := true
 var label := "Card" setget set_label
@@ -51,9 +51,10 @@ func play_reveal_animation(duration=1):
 
 
 func _input(event):
-	if event is InputEventMouseMotion and DragStore.dragged_card == self:
+	if event is InputEventMouseMotion:
 		self.has_been_dragged = true
-		self.global_position = get_global_mouse_position() + self.grabbed_offset
+		if DragStore.dragged_card == self:
+			self.global_position = get_global_mouse_position() + self.grabbed_offset
 		
 	if event.is_action_released("ui_touch"):
 		if not self.has_been_dragged:
