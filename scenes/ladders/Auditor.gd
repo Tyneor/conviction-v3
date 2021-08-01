@@ -7,6 +7,9 @@ onready var tween = $Tween
 var first_name := "Firstname"
 var index := 0
 
+func set_color(color):
+	$Panel.modulate = color
+
 func move_to_parent(target: Control, speed=300):
 	var source = self.get_parent() # null if no previous parent
 	if not source or speed == 0:

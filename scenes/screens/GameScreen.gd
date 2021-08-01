@@ -26,6 +26,7 @@ func start_game():
 		var auditor = Auditor.instance()
 		auditor.first_name = "Auditor"
 		auditor.index = i
+		auditor.set_color(Color(randf(), randf(), randf()))
 		self.auditors.append(auditor)
 	self.player.followers.max_followers = winning_nb_followers
 	self.opponent.followers.max_followers = winning_nb_followers
