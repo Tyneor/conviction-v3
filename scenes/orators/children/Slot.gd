@@ -36,8 +36,9 @@ func delete_card():
 	previous_card.modulate.a = 0.5
 	card = null
 
-func is_in_drop_range(new_card):
-	return droppable and new_card in $Area2D.get_overlapping_areas()
+func is_in_drop_range():
+	var has_mouse = Rect2(self.rect_global_position, self.rect_size).has_point(get_viewport().get_mouse_position())
+	return droppable and has_mouse
 
 func drop_in(new_card, speed=1000):
 	assert(card == null, "dropped a card on a non-empty slot")

@@ -21,7 +21,7 @@ func drop():
 	emit_signal("card_dropped")
 	var new_slot
 	for slot in slots:
-		if slot.is_in_drop_range(dragged_card):
+		if slot.is_in_drop_range():
 			new_slot = slot
 			break
 	var old_slot = dragged_card.get_parent()
