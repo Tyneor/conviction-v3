@@ -1,12 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/orators/children/Slot.gd" type="Script" id=1]
+[ext_resource path="res://scenes/orators/children/Slot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/orators/children/Deck.gd" type="Script" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 60, 90 )
 
 [node name="Deck" type="CenterContainer"]
 margin_right = 120.0
@@ -17,23 +12,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot" type="Panel" parent="."]
+[node name="Slot" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 120.0
 margin_bottom = 180.0
 rect_min_size = Vector2( 120, 180 )
-mouse_filter = 2
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Area2D" type="Area2D" parent="Slot"]
-position = Vector2( 60, 90 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Slot/Area2D"]
-shape = SubResource( 2 )
-
-[node name="Tween" type="Tween" parent="Slot"]
-
-[connection signal="input_event" from="Slot/Area2D" to="." method="_on_Area2D_input_event"]

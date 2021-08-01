@@ -33,7 +33,3 @@ func display_details():
 	var theater = Theater.instance()
 	theater.set_content(deckDetails)
 	get_tree().current_scene.add_child(theater)
-
-func _on_Area2D_input_event(_viewport, event, _shape_idx):
-	if event.is_action_pressed("ui_touch"):
-		self.display_details()

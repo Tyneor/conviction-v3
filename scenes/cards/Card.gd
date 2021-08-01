@@ -12,6 +12,9 @@ var has_been_dragged := true
 var label := "Card" setget set_label
 var description : String setget ,get_description
 
+func _ready():
+	self.connect("pressed", self, "display_details")
+
 func set_flipped(new_flipped):
 	flipped = new_flipped
 	$TextureRect/Label.visible = self.flipped
@@ -56,12 +59,7 @@ func _input(event):
 		if DragStore.dragged_card == self:
 			self.global_position = get_global_mouse_position() + self.grabbed_offset
 		
-	if event.is_action_released("ui_touch"):
-		if not self.has_been_dragged:
-			self.has_been_dragged = true
-			self.display_details()
-
-		if DragStore.dragged_card == self:
+	if event.is_action_released("ui_touch") and DragStore.dragged_card == self:
 			var duration = DragStore.drop()
 			yield(get_tree().create_timer(duration), "timeout")
 			self.z_index = 0
@@ -76,7 +74,10 @@ func _input_event(_viewport, event, _shape_idx):
 		get_tree().set_input_as_handled()	
 		
 func display_details():
-	if self.flipped:
+	if self.find_parent("Deck"):
+		self.find_parent("Deck").display_details()
+	elif self.flipped and not self.has_been_dragged:
+		self.has_been_dragged = true
 		var cardDetails = CardDetails.instance()
 		cardDetails.set_label(self.label)
 		cardDetails.set_description(self.description)
