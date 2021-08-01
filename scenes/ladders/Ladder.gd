@@ -29,13 +29,13 @@ func move_auditor_to(step):
 		yield(res, "completed")
 
 func draw_arrow_to(step):
-	if auditor.find_parent("StepsContainer"):
-		var previous_position = auditor.get_parent().rect_global_position + auditor.get_parent().rect_size / 2
-		var next_position = step.rect_global_position + step.rect_size / 2
-		self.arrow.global_position = previous_position
-		self.arrow.visible = true
-		tween.interpolate_property(self.arrow, "length", 0, next_position.y - previous_position.y, 0.2)
-		tween.start()
+	assert(self.auditor != null and auditor.find_parent("StepsContainer"))
+	var previous_position = auditor.get_parent().rect_global_position + auditor.get_parent().rect_size / 2
+	var next_position = step.rect_global_position + step.rect_size / 2
+	self.arrow.global_position = previous_position
+	self.arrow.visible = true
+	tween.interpolate_property(self.arrow, "length", 0, next_position.y - previous_position.y, 0.2)
+	tween.start()
 		
 func hide_arrow():
 #	tween.interpolate_property(self.arrow, "length", null, 0, 0.1)

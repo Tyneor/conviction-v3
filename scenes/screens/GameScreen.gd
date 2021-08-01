@@ -9,6 +9,7 @@ const Auditor = preload("res://scenes/ladders/Auditor.tscn")
 onready var player = $Player
 onready var opponent = $Opponent
 onready var personal_ladder = $PersonalLadder
+onready var global_ladder = $GlobalLadder
 var game_running = false
 var current_orator
 var auditors := []
@@ -52,41 +53,60 @@ func start_game():
 					current_orator.arena.delete_card()
 
 func on_Card_dragged(card):
-	var new_score = self._calcultate_next_score(card, opponent.arena.slot.card)
+	var new_personal_score = self._calculate_next_personal_score(card, opponent.arena.slot.card)
+	var new_global_score = self._calculate_next_global_score(card)
 	if player.arena.slot.card == null:
-		personal_ladder.draw_arrow(new_score)
+		personal_ladder.draw_arrow(new_personal_score)
+		global_ladder.draw_arrow(new_global_score)
 		
 func on_Card_dropped():
 	personal_ladder.hide_arrow()
+	global_ladder.hide_arrow()
 
 func showdown():
-	var new_score = self._calcultate_next_score(player.arena.slot.card, opponent.arena.slot.card)
-	ScoreStore.score = new_score
-	var res = personal_ladder.move_auditor()
-	if res is GDScriptFunctionState:
-		yield(res, "completed")
-	if ScoreStore.score == ScoreStore.min_score:
+	ScoreStore.global_score = self._calculate_next_global_score(current_orator.arena.slot.card)
+	var g_res = global_ladder.move_auditor()
+	if g_res is GDScriptFunctionState:
+		yield(g_res, "completed")
+	
+	ScoreStore.personal_score = self._calculate_next_personal_score(player.arena.slot.card, opponent.arena.slot.card)
+	var p_res = personal_ladder.move_auditor()
+	if p_res is GDScriptFunctionState:
+		yield(p_res, "completed")
+	
+	if ScoreStore.personal_score == ScoreStore.min_p_score:
 		self.finish_current_round(opponent)
-		self.start_new_round()
-	if ScoreStore.score == ScoreStore.max_score:
+	if ScoreStore.personal_score == ScoreStore.max_p_score:
 		self.finish_current_round(player)
-		self.start_new_round()
+	
 
-func _calcultate_next_score(player_card, opponent_card) -> int:
+func _calculate_next_personal_score(player_card, opponent_card) -> int:
 	if player_card and opponent_card: # aka not the first turn
 		match player_card.compare_with(opponent_card):
 			"swap":
-				return - ScoreStore.score
+				return - ScoreStore.personal_score
 			var score_delta:
-				return int(clamp(ScoreStore.score + score_delta, ScoreStore.min_score, ScoreStore.max_score))
-	return 0
+				return int(clamp(ScoreStore.personal_score + score_delta, ScoreStore.min_p_score, ScoreStore.max_p_score))
+	return ScoreStore.personal_score
+
+func _calculate_next_global_score(card) -> int:
+	if card and card.get_class() == "Argument":
+		var delta = (1 if self.current_orator == self.player else -1) * card.global_opinion
+		return int(clamp(ScoreStore.global_score + delta, ScoreStore.min_g_score, ScoreStore.max_g_score))
+	return ScoreStore.global_score
 	
 func start_new_round():
-	var auditor = auditors.pop_front()
+	ScoreStore.reset_personal_score()
+	var auditor = global_ladder.auditor if global_ladder.auditor else auditors.pop_front()
 	if auditor:
-		ScoreStore.score = 0
 		personal_ladder.auditor = auditor
+		global_ladder.auditor = null
 		personal_ladder.move_auditor()
+		
+	var global_auditor = auditors.pop_front()
+	if global_auditor:
+		global_ladder.auditor = global_auditor
+		global_ladder.move_auditor()
 
 func finish_current_round(round_winner):
 	var auditor = personal_ladder.auditor
@@ -94,6 +114,8 @@ func finish_current_round(round_winner):
 	personal_ladder.auditor = null
 	if round_winner.followers.is_full():
 		self.game_running = false
+	else:
+		self.start_new_round()
 
 func finish_game():
 	var screen = GameEndScreen.instance()

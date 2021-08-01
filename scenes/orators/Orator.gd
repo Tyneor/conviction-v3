@@ -22,10 +22,13 @@ func start_set():
 
 func reset_deck():
 	var cards = []
-	for i in range(7):
+	var argumentsStats = [[0, 1], [1, 0], [2, -1], [3, -1], [4, -2], [5, -2], [6, -3]]
+	for argumentStats in argumentsStats:
 		var argument = ArgumentScn.instance()
-		argument.value = i
+		argument.personal_opinion =	argumentStats[0]
+		argument.global_opinion = argumentStats[1]
 		cards.append(argument)
+		
 	cards.append(CounterScn.instance())
 	cards.append(SwapScn.instance())
 	cards.append(EurekaScn.instance())
