@@ -22,7 +22,7 @@ func _ready():
 	
 func start_game():
 	self.game_running = true
-	var winning_nb_followers = 1
+	var winning_nb_followers = 4
 	for i in range(winning_nb_followers * 2 - 1):
 		var auditor = Auditor.instance()
 		auditor.first_name = "Auditor"
