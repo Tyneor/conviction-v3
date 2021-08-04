@@ -4,14 +4,14 @@
 [ext_resource path="res://scenes/cards/CardDetails.gd" type="Script" id=2]
 [ext_resource path="res://shaders/BorderRadius.shader" type="Shader" id=3]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/color = Color( 1, 1, 1, 1 )
 shader_param/radius = 0.1
 shader_param/size = Vector2( 800, 1200 )
 
 [node name="CardDetails" type="TextureRect"]
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

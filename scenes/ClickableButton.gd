@@ -13,7 +13,7 @@ func rescale_to(scale):
 	self.tween.interpolate_property(self, "rect_scale", null, Vector2(scale, scale), 0.05)
 	self.tween.start()
 
-func _input(event):
+func _input(_event):
 	if self.get_draw_mode() == BaseButton.DRAW_PRESSED:
 		if scaled_down == false:
 			scaled_down = true

@@ -3,7 +3,7 @@ extends Node
 const ScoreStore = preload("res://stores/ScoreStore.tres")
 const Auditor = preload("res://scenes/ladders/Auditor.tscn")
 
-onready var steps_container = $StepsContainer
+onready var steps_container = $MarginContainer/StepsContainer
 onready var tween = $Tween
 var arrow : Arrow
 

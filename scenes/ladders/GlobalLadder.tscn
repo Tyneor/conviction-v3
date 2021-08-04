@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/ladders/GlobalLadder.gd" type="Script" id=2]
 
@@ -9,149 +9,177 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [node name="GlobalLadder" type="Node"]
 script = ExtResource( 2 )
 
-[node name="StepsContainer" type="VBoxContainer" parent="."]
+[node name="Tween" type="Tween" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -84.0
-margin_right = -44.0
+margin_left = -90.0
 mouse_filter = 2
-custom_constants/separation = 27
+custom_constants/margin_right = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StepsContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 40.0
+margin_bottom = 1920.0
+mouse_filter = 2
+custom_constants/separation = 40
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Step9" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 538.0
-margin_right = 40.0
-margin_bottom = 578.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step9" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 590.0
+margin_right = 30.0
+margin_bottom = 610.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Step10" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 605.0
-margin_right = 40.0
-margin_bottom = 645.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step10" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 650.0
+margin_right = 30.0
+margin_bottom = 670.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Step11" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 672.0
-margin_right = 40.0
-margin_bottom = 712.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step11" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 710.0
+margin_right = 30.0
+margin_bottom = 730.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Step12" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 739.0
-margin_right = 40.0
-margin_bottom = 779.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step12" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 770.0
+margin_right = 30.0
+margin_bottom = 790.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Step13" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 806.0
-margin_right = 40.0
-margin_bottom = 846.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step13" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 830.0
+margin_right = 30.0
+margin_bottom = 850.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Step14" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 873.0
-margin_right = 40.0
-margin_bottom = 913.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step14" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 890.0
+margin_right = 30.0
+margin_bottom = 910.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Center" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 0, 0, 0, 0.392157 )
-margin_top = 940.0
+[node name="Center" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_top = 950.0
 margin_right = 40.0
-margin_bottom = 980.0
-rect_min_size = Vector2( 40, 40 )
+margin_bottom = 970.0
+rect_min_size = Vector2( 40, 20 )
 mouse_filter = 2
+size_flags_horizontal = 4
+custom_styles/panel = SubResource( 2 )
+
+[node name="Step" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 1010.0
+margin_right = 30.0
+margin_bottom = 1030.0
+rect_min_size = Vector2( 20, 20 )
+mouse_filter = 2
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Step" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 1007.0
-margin_right = 40.0
-margin_bottom = 1047.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step2" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 1070.0
+margin_right = 30.0
+margin_bottom = 1090.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Step2" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 1074.0
-margin_right = 40.0
-margin_bottom = 1114.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step3" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 1130.0
+margin_right = 30.0
+margin_bottom = 1150.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Step3" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 1141.0
-margin_right = 40.0
-margin_bottom = 1181.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step4" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 1190.0
+margin_right = 30.0
+margin_bottom = 1210.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Step4" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 1208.0
-margin_right = 40.0
-margin_bottom = 1248.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step5" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 1250.0
+margin_right = 30.0
+margin_bottom = 1270.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 
-[node name="Step5" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 1275.0
-margin_right = 40.0
-margin_bottom = 1315.0
-rect_min_size = Vector2( 40, 40 )
+[node name="Step6" type="Panel" parent="MarginContainer/StepsContainer"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 10.0
+margin_top = 1310.0
+margin_right = 30.0
+margin_bottom = 1330.0
+rect_min_size = Vector2( 20, 20 )
 mouse_filter = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
-
-[node name="Step6" type="Panel" parent="StepsContainer"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_top = 1342.0
-margin_right = 40.0
-margin_bottom = 1382.0
-rect_min_size = Vector2( 40, 40 )
-mouse_filter = 2
-size_flags_horizontal = 0
-custom_styles/panel = SubResource( 1 )
-
-[node name="Tween" type="Tween" parent="."]
