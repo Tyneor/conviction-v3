@@ -19,6 +19,7 @@ tracks/0/keys = {
 }
 
 [node name="SceneSwitcher" type="CanvasLayer"]
+layer = 10
 script = ExtResource( 1 )
 
 [node name="Black" type="ColorRect" parent="."]

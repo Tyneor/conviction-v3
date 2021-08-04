@@ -6,6 +6,7 @@ const GameEndScreen = preload("res://scenes/screens/GameEndScreen.tscn")
 const Theater = preload("res://scenes/Theater.tscn")
 const Auditor = preload("res://scenes/ladders/Auditor.tscn")
 
+export var are_timers_used := false
 onready var player = $Player
 onready var opponent = $Opponent
 onready var personal_ladder = $PersonalLadder
@@ -21,19 +22,17 @@ func _ready():
 	
 func start_game():
 	self.game_running = true
-	var winning_nb_followers = 4
+	var winning_nb_followers = 1
 	for i in range(winning_nb_followers * 2 - 1):
 		var auditor = Auditor.instance()
 		auditor.first_name = "Auditor"
 		auditor.index = i
 		auditor.set_color(Color(randf(), randf(), randf()))
 		self.auditors.append(auditor)
-	self.player.followers.max_followers = winning_nb_followers
-	self.opponent.followers.max_followers = winning_nb_followers
+	self.player.start_game(winning_nb_followers, are_timers_used)
+	self.opponent.start_game(winning_nb_followers, are_timers_used)
 	self.start_new_round()
-	self.player.start_set()
-	self.opponent.start_set()
-	self.current_orator = player
+	self.current_orator = player if randf() > 0.5 else opponent
 	
 	DragStore.connect("card_dragged", self, "on_Card_dragged")
 	DragStore.connect("card_dropped", self, "on_Card_dropped")

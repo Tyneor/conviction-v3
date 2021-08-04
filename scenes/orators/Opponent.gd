@@ -1,8 +1,8 @@
 extends Orator
 
-func start_turn():
+func start_turn(max_duration=5):
 	self.play_random_card()
-	yield(.start_turn(), "completed")
+	yield(.start_turn(max_duration), "completed")
 
 func play_random_card():
 	yield(get_tree().create_timer(1.0), "timeout")

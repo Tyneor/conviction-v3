@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/orators/children/Hand.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/orators/Opponent.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/orators/children/Arena.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/orators/children/Deck.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/orators/children/Followers.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/hourglass.svg" type="Texture" id=8]
+[ext_resource path="res://scenes/ClickableButton.gd" type="Script" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -17,6 +19,27 @@ shader_param/size = Vector2( 945, 380 )
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 2048, 2048 )
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="DynamicFont" id=8]
+size = 1
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [node name="Opponent" type="Node"]
 script = ExtResource( 2 )
@@ -38,19 +61,88 @@ anchor_right = 0.5
 margin_left = -472.5
 margin_top = 50.0
 margin_right = 472.5
-margin_bottom = 430.0
+margin_bottom = 490.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Table" type="HBoxContainer" parent="Panel"]
-anchor_top = 0.5
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -165.0
-margin_bottom = 165.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Table" type="VBoxContainer" parent="Panel/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 925.0
+margin_bottom = 400.0
+mouse_filter = 2
+custom_constants/separation = 30
+alignment = 1
+
+[node name="Bottom" type="Button" parent="Panel/MarginContainer/Table"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_top = 5.0
+margin_right = 905.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 40 )
+focus_mode = 0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
+script = ExtResource( 9 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TextureButton" type="TextureRect" parent="Panel/MarginContainer/Table/Bottom"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/MarginContainer/Table/Bottom"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 50.0
+margin_right = 905.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Top" type="HBoxContainer" parent="Panel/MarginContainer/Table"]
+margin_top = 75.0
+margin_right = 905.0
+margin_bottom = 375.0
 mouse_filter = 2
 custom_constants/separation = 30
 alignment = 1
@@ -58,30 +150,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="VBoxContainer" parent="Panel/Table"]
-margin_left = 67.0
-margin_right = 187.0
-margin_bottom = 330.0
+[node name="Left" type="VBoxContainer" parent="Panel/MarginContainer/Table/Top"]
+margin_left = 47.0
+margin_right = 167.0
+margin_bottom = 300.0
 mouse_filter = 2
 custom_constants/separation = 20
 
-[node name="Deck" parent="Panel/Table/Left" instance=ExtResource( 6 )]
+[node name="Deck" parent="Panel/MarginContainer/Table/Top/Left" instance=ExtResource( 6 )]
 
-[node name="Followers" parent="Panel/Table/Left" instance=ExtResource( 7 )]
+[node name="Followers" parent="Panel/MarginContainer/Table/Top/Left" instance=ExtResource( 7 )]
 margin_top = 200.0
 margin_right = 120.0
 margin_bottom = 200.0
 
-[node name="Right" type="VBoxContainer" parent="Panel/Table"]
-margin_left = 217.0
-margin_right = 877.0
-margin_bottom = 330.0
+[node name="Right" type="VBoxContainer" parent="Panel/MarginContainer/Table/Top"]
+margin_left = 197.0
+margin_right = 857.0
+margin_bottom = 300.0
 mouse_filter = 2
 alignment = 1
 
-[node name="Hand" parent="Panel/Table/Right" instance=ExtResource( 1 )]
-margin_top = 15.0
+[node name="Hand" parent="Panel/MarginContainer/Table/Top/Right" instance=ExtResource( 1 )]
 margin_right = 660.0
-margin_bottom = 315.0
+margin_bottom = 300.0
 
+[node name="Tween" type="Tween" parent="."]
 [connection signal="card_played" from="Arena" to="." method="_on_Arena_card_played"]
